@@ -1,12 +1,19 @@
 package com.UNIWheels.entities;
 
 import com.UNIWheels.entities.enums.enumPayMethods;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
 
+
+@Document
 public class PayMethods {
 
+    @Id
     private String id;
     private enumPayMethods Type;
     private String owner;
+    @Indexed(unique = true)
     private String number;
     private String bank;
     private String expirationDate;
