@@ -1,5 +1,6 @@
 package com.UNIWheels.entities;
 
+import com.UNIWheels.dto.PayMethodsDto;
 import com.UNIWheels.entities.enums.enumPayMethods;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
@@ -20,6 +21,15 @@ public class PayMethods {
 
     public PayMethods(){
         this.id = String.valueOf((int)(Math.random()*9));
+    }
+
+    public PayMethods(PayMethodsDto dto) {
+        this.id = dto.getId();
+        this.Type = dto.getType();
+        this.owner = dto.getOwner();
+        this.number = dto.getNumber();
+        this.bank = dto.getBank();
+        this.expirationDate = getExpirationDate();
     }
 
     public PayMethods(enumPayMethods Type, String owner, String number, String bank, String ExpirationDate){
