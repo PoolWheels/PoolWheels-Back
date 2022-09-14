@@ -1,45 +1,26 @@
-package com.UNIWheels.entities;
+package com.UNIWheels.dto;
 
-// This is importing the necessary packages for the class.
-import com.UNIWheels.dto.PayMethodsDto;
-import com.UNIWheels.entities.enums.enumPayMethods;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
-import org.springframework.data.mongodb.core.mapping.Document;
-
+import com.UNIWheels.entities.enums.enumPayMethod;
 
 /**
- * The class PayMethods is a document that has an id, a type, an owner, a number, a bank and an expiration date
+ * A DTO class that represents a PayMethod.
  */
-@Document
-public class PayMethods {
+public class PayMethodDto {
 
-    @Id
     private String id;
-    private enumPayMethods Type;
+    private enumPayMethod Type;
     private String owner;
-    @Indexed(unique = true)
     private String number;
     private String bank;
     private String expirationDate;
 
-    // Creating a random id for the paymethods.
-    public PayMethods(){
+    // Creating a random number between 0 and 9 and setting it to the id.
+    public PayMethodDto(){
         this.id = String.valueOf((int)(Math.random()*9));
     }
 
-    // A constructor that takes a PayMethodsDto object and creates a PayMethods object.
-    public PayMethods(PayMethodsDto dto) {
-        this.id = dto.getId();
-        this.Type = dto.getType();
-        this.owner = dto.getOwner();
-        this.number = dto.getNumber();
-        this.bank = dto.getBank();
-        this.expirationDate = dto.getExpirationDate();
-    }
-
-    // This is a constructor that takes in the parameters and sets them to the variables.
-    public PayMethods(enumPayMethods Type, String owner, String number, String bank, String ExpirationDate){
+    // A constructor that takes in the parameters and sets them to the class variables.
+    public PayMethodDto(enumPayMethod Type, String owner, String number, String bank, String ExpirationDate){
         this();
         this.Type = Type;
         this.owner = owner;
@@ -48,18 +29,18 @@ public class PayMethods {
         this.expirationDate = ExpirationDate;
     }
 
-    // This is a constructor that takes in the parameters and sets them to the variables.
-    public PayMethods(String id,enumPayMethods type, String owner, String number, String bank, String ExpirationDate){
+    // This is a constructor that takes in the parameters and sets them to the class variables.
+    public PayMethodDto(String id, enumPayMethod type, String owner, String number, String bank, String ExpirationDate){
         this(type, owner, number, bank, ExpirationDate);
         this.id = id;
     }
 
     /**
-     * This function returns the type of payment method
+     * This function returns the type of the payment method
      *
      * @return The type of payment method.
      */
-    public enumPayMethods getType() {
+    public enumPayMethod getType() {
         return Type;
     }
 
@@ -82,9 +63,9 @@ public class PayMethods {
     }
 
     /**
-     * This function returns the number of the card.
+     * This function returns the number of the phone.
      *
-     * @return The number of the card.
+     * @return The number of the phone.
      */
     public String getNumber() {
         return number;
@@ -122,14 +103,14 @@ public class PayMethods {
      *
      * @param type The type of payment method.
      */
-    public void setType(enumPayMethods type) {
+    public void setType(enumPayMethod type) {
         Type = type;
     }
 
     /**
      * This function sets the number of the phone to the number passed in.
      *
-     * @param number The number of the card
+     * @param number The phone number to send the message to.
      */
     public void setNumber(String number) {
         this.number = number;
@@ -147,19 +128,18 @@ public class PayMethods {
     /**
      * This function sets the owner of the card.
      *
-     * @param owner The owner of the repository.
+     * @param owner The owner of the card.
      */
     public void setOwner(String owner) {
         this.owner = owner;
     }
 
     /**
-     * This function sets the expiration date of thecard
+     * This function sets the expiration date of the card
      *
-     * @param expirationDate The date the card expires.
+     * @param expirationDate The date the expires.
      */
     public void setExpirationDate(String expirationDate) {
         this.expirationDate = expirationDate;
     }
-
 }

@@ -1,6 +1,6 @@
 package com.UNIWheels.entities.enums;
 
 // Creating an enum called enumPayMethods with three values: Debito, Credito, CarteraVirtual.
-public enum enumPayMethods {
+public enum enumPayMethod {
     Debito, Credito, CarteraVirtual;
 }

@@ -1,22 +1,22 @@
 package com.UNIWheels.service;
 
 // This is importing the PayMethods class and the List class.
-import com.UNIWheels.entities.PayMethods;
+import com.UNIWheels.entities.PayMethod;
 
 import java.util.List;
 
 // This is the interface for the PayMethodsService. It is a contract that says that any class that implements this
 // interface must have these methods.
-public interface PayMethodsService {
+public interface PayMethodService {
 
-    PayMethods create(PayMethods user );
+    PayMethod create(PayMethod user );
 
-    PayMethods findById( String id );
+    PayMethod findById(String id );
 
-    List<PayMethods> getAll();
+    List<PayMethod> getAll();
 
-    void deleteById( String id );
+    boolean deleteById( String id );
 
-    PayMethods update(PayMethods user, String userId );
+    PayMethod update(PayMethod user, String userId );
 
 }

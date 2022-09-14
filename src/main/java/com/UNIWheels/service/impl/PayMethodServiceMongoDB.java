@@ -1,26 +1,29 @@
 package com.UNIWheels.service.impl;
 
 // Importing the necessary classes for the service to work.
-import com.UNIWheels.entities.PayMethods;
-import com.UNIWheels.repository.PayMethodsRepository;
-import com.UNIWheels.service.PayMethodsService;
+import com.UNIWheels.entities.PayMethod;
+import com.UNIWheels.repository.PayMethodRepository;
+import com.UNIWheels.service.PayMethodService;
+import com.mongodb.DuplicateKeyException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 
 /**
  * > This class is a service that implements the PayMethodsService interface
  */
 @Service
-public class PayMethodsServiceMongoDB implements PayMethodsService {
+public class PayMethodServiceMongoDB implements PayMethodService {
 
     // Creating a variable that is private and final.
-    private final PayMethodsRepository paymethodsRepository;
+    private final PayMethodRepository paymethodsRepository;
 
     // This is a constructor that is used to create a new instance of the class.
-    public PayMethodsServiceMongoDB(@Autowired PayMethodsRepository paymethodsRepository) {
+    public PayMethodServiceMongoDB(@Autowired PayMethodRepository paymethodsRepository) {
         this.paymethodsRepository = paymethodsRepository;
     }
 
@@ -32,9 +35,15 @@ public class PayMethodsServiceMongoDB implements PayMethodsService {
      * @return The paymethod object is being returned.
      */
     @Override
-    public PayMethods create(PayMethods paymethod) {
-        paymethodsRepository.save(paymethod);
-        return paymethod;
+    public PayMethod create(PayMethod paymethod) {
+        try {
+            paymethodsRepository.insert(paymethod);
+            Optional<PayMethod> userTemp = paymethodsRepository.findById(paymethod.getId());
+            return userTemp.orElse(null);
+        } catch (DuplicateKeyException e) {
+            System.out.println("The specified id is already registered");
+            return null;
+        }
     }
 
     /**
@@ -44,7 +53,7 @@ public class PayMethodsServiceMongoDB implements PayMethodsService {
      * @return The paymethodsRepository.findById(id).get() is returning the PayMethods object.
      */
     @Override
-    public PayMethods findById(String id) {
+    public PayMethod findById(String id) {
         return paymethodsRepository.findById(id).get();
     }
 
@@ -54,7 +63,7 @@ public class PayMethodsServiceMongoDB implements PayMethodsService {
      * @return A list of all the paymethods in the database.
      */
     @Override
-    public List<PayMethods> getAll() {
+    public List<PayMethod> getAll() {
         return paymethodsRepository.findAll();
     }
 
@@ -62,10 +71,16 @@ public class PayMethodsServiceMongoDB implements PayMethodsService {
      * It deletes a paymethod by its id.
      *
      * @param id The id of the paymethods to delete.
+     * @return
      */
     @Override
-    public void deleteById(String id) {
-        paymethodsRepository.deleteById(id);
+    public boolean deleteById(String id) {
+        try {
+            paymethodsRepository.deleteById(id);
+            return true;
+        } catch (IllegalArgumentException e) {
+            return false;
+        }
     }
 
     /**
@@ -76,8 +91,12 @@ public class PayMethodsServiceMongoDB implements PayMethodsService {
      * @return The updated paymethods object.
      */
     @Override
-    public PayMethods update(PayMethods paymethod, String userId) {
-        paymethodsRepository.save(paymethod);
-        return paymethodsRepository.findById(userId).get();
+    public PayMethod update(PayMethod paymethod, String userId) {
+        if (paymethodsRepository.existsById(userId)) {
+            return paymethodsRepository.save(paymethod);
+        } else {
+            System.out.println("The specified id is not registered");
+            return null;
+        }
     }
 }
