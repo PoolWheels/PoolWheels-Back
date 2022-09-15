@@ -1,5 +1,6 @@
 package com.UNIWheels.service;
 
+import com.UNIWheels.entities.User;
 import com.UNIWheels.entities.UserDriver;
 import com.UNIWheels.entities.UserTraveler;
 
@@ -17,5 +18,5 @@ public interface UserService {
     boolean deleteTraveler(String id);
     UserTraveler findByIdTraveler(String id);
     List<UserTraveler>getAllTraveler();
-
+    User findByEmail(String email);
 }
