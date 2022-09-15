@@ -21,16 +21,27 @@ public class UserTravelerDTO {
     private String rol;
 
 
-    public UserTravelerDTO(String name, String lastName, String email, String password, String university, int phone, String pay_methods,String rol) {
+    public UserTravelerDTO(){
+        this.id = String.valueOf((int)(Math.random()*5));
+    }
+
+    public UserTravelerDTO(String name,String lastName, String email, String password, String university, int phone, String rol, String Paymethod){
+        this();
         this.name = name;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
-        this.university = university;
+        this.university=university;
         this.phone = phone;
-        this.pay_methods = pay_methods;
-        this.rol=rol;
+        this.rol = rol;
+        this.pay_methods = Paymethod;
     }
+
+    public UserTravelerDTO(String id, String name,String lastName, String email, String password, String university, int phone, String rol, String paymethods){
+        this(name,lastName, email,password, university, phone,rol, paymethods);
+        this.id = id;
+    }
+
 
     public String getName() {
         return name;

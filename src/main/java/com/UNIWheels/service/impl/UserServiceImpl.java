@@ -1,8 +1,6 @@
 package com.UNIWheels.service.impl;
 
-import com.UNIWheels.dto.UserDriverDTO;
-import com.UNIWheels.dto.UserDriverDTO;
-import com.UNIWheels.dto.UserTravelerDTO;
+import com.UNIWheels.entities.User;
 import com.UNIWheels.entities.UserDriver;
 import com.UNIWheels.entities.UserTraveler;
 import com.UNIWheels.repository.UserDriverRepository;
@@ -108,4 +106,20 @@ public class UserServiceImpl implements UserService {
         return userTravelerRepository.findAll();
     }
 
+    @Override
+    public User findByEmail(String email) {
+        System.out.println("USERS...."+ userDriverRepository.findAll());
+        System.out.println("USERS...."+ userTravelerRepository.findAll());
+
+        if (userDriverRepository.findByEmail(email).isPresent()){
+            return userDriverRepository.findByEmail(email).get();
+
+        } else if(userTravelerRepository.findByEmail(email).isPresent()){
+            return userTravelerRepository.findByEmail(email).get();
+
+        } else {
+            return null;
+        }
+
+    }
 }
