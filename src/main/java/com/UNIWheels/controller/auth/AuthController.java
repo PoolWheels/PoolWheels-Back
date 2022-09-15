@@ -41,8 +41,7 @@ public class AuthController
     public TokenDto login(@RequestBody LoginDto loginDto )
     {
         User user = userService.findByEmail(loginDto.getEmail());
-        System.out.println("USER......." + user);
-        if ( BCrypt.checkpw(loginDto.getPassword(), user.getPassword()) ){
+        if ( loginDto.getPassword().equals(user.getPassword()) ){
             return generateTokenDto(user);
         }
         else

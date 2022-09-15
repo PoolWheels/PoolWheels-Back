@@ -1,5 +1,6 @@
 package com.UNIWheels.entities;
 
+import com.UNIWheels.dto.UserDriverDTO;
 import com.UNIWheels.dto.UserTravelerDTO;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.crypto.bcrypt.BCrypt;
@@ -10,16 +11,14 @@ public class UserTraveler extends User {
     private String pay_methods;
 
 
-    public UserTraveler(UserTravelerDTO userTravelerDTO) {
 
-        this(userTravelerDTO.getId(), userTravelerDTO.getName(), userTravelerDTO.getLastName(), userTravelerDTO.getEmail(), BCrypt.hashpw(userTravelerDTO.getPassword(), BCrypt.gensalt()), userTravelerDTO.getUniversity(), userTravelerDTO.getPhone(), userTravelerDTO.getRol());
-        setPay_methods(pay_methods);
-
-
+    public UserTraveler(){
 
     }
-    public UserTraveler(String id, String name, String lastName, String email, String password, String university, int phone, String rol) {
-        super(id, name, lastName, email, password, university, phone, rol);
+
+    public UserTraveler(UserTravelerDTO userTravellerDTO) {
+        super(userTravellerDTO.getId(), userTravellerDTO.getName(), userTravellerDTO.getLastName(), userTravellerDTO.getEmail(), BCrypt.hashpw(userTravellerDTO.getPassword(), BCrypt.gensalt()), userTravellerDTO.getUniversity(), userTravellerDTO.getPhone(), userTravellerDTO.getRol());
+        this.pay_methods = userTravellerDTO.getPay_methods();
     }
 
     public String getPay_methods() {

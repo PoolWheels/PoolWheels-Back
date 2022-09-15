@@ -19,11 +19,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 
 import static com.UNIWheels.utils.Constants.CLAIMS_ROLES_KEY;
@@ -76,12 +72,12 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                     Jws<Claims> claims = Jwts.parser().setSigningKey( secret ).parseClaimsJws( token );
                     Claims claimsBody = claims.getBody();
                     String subject = claimsBody.getSubject();
-                    List<String> roles  = claims.getBody().get( CLAIMS_ROLES_KEY , ArrayList.class);
+                    String roles  = claims.getBody().get( CLAIMS_ROLES_KEY , String.class);
 
                     if (roles == null) {
                         response.sendError(HttpStatus.UNAUTHORIZED.value(), "Invalid token roles");
                     } else {
-                        SecurityContextHolder.getContext().setAuthentication( new TokenAuthentication( token, subject, roles));
+                        SecurityContextHolder.getContext().setAuthentication( new TokenAuthentication( token, subject, Collections.singletonList(roles)));
                     }
 
                     request.setAttribute( "claims", claimsBody );

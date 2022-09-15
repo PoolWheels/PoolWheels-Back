@@ -17,16 +17,16 @@ public class UserDriver extends User {
     }
 
     public UserDriver(UserDriverDTO userDriverDTO) {
-        this(userDriverDTO.getId(), userDriverDTO.getName(), userDriverDTO.getLastName(), userDriverDTO.getEmail(), BCrypt.hashpw(userDriverDTO.getPassword(), BCrypt.gensalt()), userDriverDTO.getUniversity(), userDriverDTO.getPhone(), userDriverDTO.getRol());
+        super(userDriverDTO.getId(), userDriverDTO.getName(), userDriverDTO.getLastName(), userDriverDTO.getEmail(), BCrypt.hashpw(userDriverDTO.getPassword(), BCrypt.gensalt()), userDriverDTO.getUniversity(), userDriverDTO.getPhone(), userDriverDTO.getRol());
         this.document = userDriverDTO.getDocument();
         this.photoCar= userDriverDTO.getPhoto();
         this.modeloCar = userDriverDTO.getModeloCar();
         this.plate = userDriverDTO.getPlate();
     }
 
-    public UserDriver(String id, String name, String lastName, String email, String password, String university, int phone, String rol) {
-        super(id, name, lastName, email, password, university, phone, rol);
-    }
+    /*public UserDriver(String id, String name, String lastName, String email, String password, String university, int phone, String rol) {
+        super(id, name, lastName, email, BCrypt.hashpw(password, BCrypt.gensalt()), university, phone, rol);
+    }*/
 
     public String getDocument() {
         return document;
