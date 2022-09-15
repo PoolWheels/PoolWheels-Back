@@ -2,6 +2,7 @@ package com.UNIWheels.dto;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class TripDto {
     
@@ -9,7 +10,7 @@ public class TripDto {
     private String driver;
     private String addrInit;
     private String addrFin;
-    private Integer availableSeats;
+    private AtomicInteger availableSeats;
     private HashMap<String, Integer> stops;
     private ArrayList<String> passengers;
     private String initTime;
@@ -22,7 +23,7 @@ public class TripDto {
     }
 
     // It's a constructor.
-    public TripDto(String driver, String addrInit, String addrFin, Integer availableSeats,
+    public TripDto(String driver, String addrInit, String addrFin, AtomicInteger availableSeats,
             HashMap<String, Integer> stops, ArrayList<String> passengers, String initTime, String finTime,
             boolean active) {
         this();
@@ -38,7 +39,7 @@ public class TripDto {
     }
 
     // It's a constructor.
-    public TripDto(String id, String driver, String addrInit, String addrFin, Integer availableSeats,
+    public TripDto(String id, String driver, String addrInit, String addrFin, AtomicInteger availableSeats,
             HashMap<String, Integer> stops, ArrayList<String> passengers, String initTime, String finTime,
             boolean active) {
         this(driver, addrInit, addrFin, availableSeats, stops, passengers, initTime, finTime, active);
@@ -77,11 +78,11 @@ public class TripDto {
         this.addrFin = addrFin;
     }
 
-    public Integer getAvailableSeats() {
+    public AtomicInteger getAvailableSeats() {
         return availableSeats;
     }
 
-    public void setAvailableSeats(Integer availableSeats) {
+    public void setAvailableSeats(AtomicInteger availableSeats) {
         this.availableSeats = availableSeats;
     }
 

@@ -20,6 +20,6 @@ public interface TripService {
 
     boolean fullQuotas( String idTrip );
 
-    //void removeReservation( String idTrip, String idUser );
+    void removeReservation( String idTrip, String idUser );
     
 }

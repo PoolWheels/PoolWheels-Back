@@ -2,6 +2,7 @@ package com.UNIWheels.entities;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -19,7 +20,7 @@ public class Trip {
     private String driver;
     private String addrInit;
     private String addrFin;
-    private Integer availableSeats;
+    private AtomicInteger availableSeats;
     private HashMap<String, Integer> stops;
     private ArrayList<String> passengers;
     private String initTime;
@@ -32,7 +33,7 @@ public class Trip {
     }
 
     // It's a constructor.
-    public Trip(String driver, String addrInit, String addrFin, Integer availableSeats, HashMap<String, Integer> stops,
+    public Trip(String driver, String addrInit, String addrFin, AtomicInteger availableSeats, HashMap<String, Integer> stops,
             ArrayList<String> passengers, String initTime) {
         this();
         this.driver = driver;
