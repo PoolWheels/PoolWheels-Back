@@ -34,7 +34,7 @@ public interface CommentService {
      *
      * @param id The id of the document to delete.
      */
-    void deleteById( String id );
+    boolean deleteById( String id );
 
     /**
      * Update a comment in the database.
