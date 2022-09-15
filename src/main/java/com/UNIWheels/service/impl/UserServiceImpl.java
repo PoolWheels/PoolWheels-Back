@@ -1,8 +1,5 @@
 package com.UNIWheels.service.impl;
 
-import com.UNIWheels.dto.UserDriverDTO;
-import com.UNIWheels.dto.UserDriverDTO;
-import com.UNIWheels.dto.UserTravelerDTO;
 import com.UNIWheels.entities.UserDriver;
 import com.UNIWheels.entities.UserTraveler;
 import com.UNIWheels.repository.UserDriverRepository;

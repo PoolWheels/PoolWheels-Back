@@ -1,16 +1,8 @@
 package com.UNIWheels.entities;
 
 import com.UNIWheels.dto.UserDriverDTO;
-import com.UNIWheels.dto.UserDriverDTO;
-import com.UNIWheels.dto.UserTravelerDTO;
-import org.apache.catalina.Group;
-import org.apache.catalina.Role;
-import org.apache.catalina.UserDatabase;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.crypto.bcrypt.BCrypt;
-
-import java.util.Iterator;
 
 
 @Document
