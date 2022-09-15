@@ -153,4 +153,5 @@ public class Comment {
     public void setType(String type) {
         this.type = type;
     }
+
 }
