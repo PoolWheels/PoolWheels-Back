@@ -2,7 +2,7 @@ package com.UNIWheels.entities;
 
 // This is importing the necessary packages for the class.
 import com.UNIWheels.dto.PayMethodDto;
-import com.UNIWheels.entities.enums.enumPayMethod;
+import com.UNIWheels.enums.enumPayMethod;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;

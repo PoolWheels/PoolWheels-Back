@@ -1,6 +1,6 @@
 package com.UNIWheels.dto;
 
-import com.UNIWheels.entities.enums.enumPayMethod;
+import com.UNIWheels.enums.enumPayMethod;
 
 /**
  * A DTO class that represents a PayMethod.

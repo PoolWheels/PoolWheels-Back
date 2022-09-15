@@ -1,8 +1,8 @@
 package com.UNIWheels;
 
-// It's importing the Spring Boot application class and the annotation that marks a class as a Spring Boot application.
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 /**
  * It's a Spring Boot application
