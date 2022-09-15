@@ -16,15 +16,21 @@ public class CommentDto {
     private CommentTypeEnum type;
 
     public CommentDto() {
+        this.id = String.valueOf((int)(Math.random()*5));
     }
 
-    public CommentDto(String id, User user, Date creationDate, Date modificationDate, String description, CommentTypeEnum type) {
-        this.id = id;
+    public CommentDto(User user, Date creationDate, Date modificationDate, String description, CommentTypeEnum type) {
+        this();
         this.user = user;
         this.creationDate = creationDate;
         this.modificationDate = modificationDate;
         this.description = description;
         this.type = type;
+    }
+
+    public CommentDto(String id, User user, Date creationDate, Date modificationDate, String description, CommentTypeEnum type) {
+        this(user, creationDate, modificationDate, description, type);
+        this.id = id;
     }
 
     /**
