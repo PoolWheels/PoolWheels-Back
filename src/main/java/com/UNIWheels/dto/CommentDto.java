@@ -141,5 +141,7 @@ public class CommentDto {
     public void setType(CommentTypeEnum type) {
         this.type = type;
     }
+
+
 }
 

@@ -97,4 +97,8 @@ public abstract class User {
         this.rol = rol;
     }
 
+    @Override
+    public String toString() {
+        return name;
+    }
 }
