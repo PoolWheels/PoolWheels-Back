@@ -1,12 +1,8 @@
 package com.UNIWheels.controller;
 
-import com.UNIWheels.dto.PayMethodDto;
-import com.UNIWheels.dto.TripDto;
-import com.UNIWheels.dto.UserDriverDTO;
-import com.UNIWheels.dto.UserTravelerDTO;
-import com.UNIWheels.entities.Trip;
-import com.UNIWheels.entities.UserDriver;
-import com.UNIWheels.entities.UserTraveler;
+import com.UNIWheels.dto.*;
+import com.UNIWheels.entities.*;
+import com.UNIWheels.service.CommentService;
 import com.UNIWheels.service.PayMethodService;
 import com.UNIWheels.service.TripService;
 import com.UNIWheels.service.UserService;
@@ -15,8 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import com.UNIWheels.entities.PayMethod;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +28,9 @@ public class UniWheelsController {
     @Autowired
     private final UserService userService;
 
+    @Autowired
+    private final CommentService commentService;
+
     ModelMapper modelMapper = new ModelMapper();
 
 
@@ -44,10 +41,11 @@ public class UniWheelsController {
      * @param tripService The trips service
      * @param userService The Users service
      */
-    public UniWheelsController (PayMethodService payMethodService, TripService tripService, UserService userService) {
+    public UniWheelsController (PayMethodService payMethodService, TripService tripService, UserService userService, CommentService commentService) {
         this.payMethodService = payMethodService;
         this.tripService = tripService;
         this.userService = userService;
+        this.commentService = commentService;
     }
 
     /* Payment methods services */
@@ -268,6 +266,43 @@ public class UniWheelsController {
         }
     }
 
+    /**
+     * It returns a boolean value that indicates whether the trip with the given id has full quotas or not
+     *
+     * @param id The id of the trip
+     * @return A boolean value.
+     */
+    @GetMapping("/api/v1/trips/{id}/availableseats")
+    public ResponseEntity<Boolean> areFullQuotas (@PathVariable String id) {
+        try {
+            boolean fullQuotas = tripService.fullQuotas(id);
+            if (fullQuotas) {
+                return new ResponseEntity<Boolean>(true, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<Boolean>(false, HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<Boolean>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @DeleteMapping("/api/v1/trips/{idTrip}/passengers/{idPassenger}")
+    public ResponseEntity<Boolean> removePassengerReservation (@PathVariable String idTrip, @PathVariable String idPassenger) {
+        try {
+            //boolean removed = tripService.removeReservation(idTrip, idPassenger);
+            boolean removed = true;
+            if (removed) {
+                return new ResponseEntity<Boolean>(true, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<Boolean>(false, HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<Boolean>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     /* Driver users services */
 
     /**
@@ -475,6 +510,85 @@ public class UniWheelsController {
     public ResponseEntity<Boolean> deleteTravelerUser (@PathVariable String id) {
         try {
             boolean deleted = userService.deleteTraveler(id);
+            if (deleted) {
+                return new ResponseEntity<Boolean>(true, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<Boolean>(false, HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<Boolean>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    /* Comments services */
+
+    @GetMapping("/api/v1/comments")
+    public ResponseEntity<List<CommentDto>> getAllComments () {
+        try {
+            List<Comment> commentList = commentService.getAll();
+            ArrayList<CommentDto> data = new ArrayList<CommentDto>();
+            if (!commentList.isEmpty()) {
+                for (Comment c : commentList) {
+                    data.add(modelMapper.map(c, CommentDto.class));
+                }
+            }
+            return new ResponseEntity<List<CommentDto>> (data, HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<List<CommentDto>> (HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/api/v1/comments/{id}")
+    public ResponseEntity<CommentDto> getCommentById(@PathVariable String id) {
+        try {
+            Comment commentTemp = commentService.findById(id);
+            if (commentTemp != null) {
+                return new ResponseEntity<CommentDto>(modelMapper.map(commentTemp, CommentDto.class), HttpStatus.OK);
+            } else {
+                return new ResponseEntity<CommentDto>(HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<CommentDto>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PostMapping("/api/v1/comments")
+    public ResponseEntity<CommentDto> createNewComment (@RequestBody CommentDto newCommentDto) {
+        try {
+            Comment commentTemp = commentService.create(modelMapper.map(newCommentDto, Comment.class));
+            if (commentTemp != null) {
+                return new ResponseEntity<CommentDto>(modelMapper.map(commentTemp, CommentDto.class), HttpStatus.CREATED);
+            } else {
+                return new ResponseEntity<CommentDto>(HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<CommentDto>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PutMapping("/api/v1/comments/{id}")
+    public ResponseEntity<CommentDto> updateComment (@RequestBody CommentDto commentDto, @PathVariable String id) {
+        try {
+            Comment commentTemp = commentService.update(modelMapper.map(commentDto, Comment.class), id);
+            if (commentTemp != null) {
+                return new ResponseEntity<CommentDto>(modelMapper.map(commentTemp, CommentDto.class), HttpStatus.OK);
+            } else {
+                return new ResponseEntity<CommentDto>(HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<CommentDto>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @DeleteMapping("/api/v1/comments/{id}")
+    public ResponseEntity<Boolean> deleteComment (@PathVariable String id) {
+        try {
+            boolean deleted = tripService.deleteById(id);
             if (deleted) {
                 return new ResponseEntity<Boolean>(true, HttpStatus.OK);
             } else {
