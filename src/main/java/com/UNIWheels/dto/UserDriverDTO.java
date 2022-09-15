@@ -1,11 +1,7 @@
-package com.UNIWheels.entities;
+package com.UNIWheels.dto;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+public class UserDriverDTO {
 
-public abstract class User {
-
-    @Id
     private String id;
 
     private String name;
@@ -18,9 +14,25 @@ public abstract class User {
 
     private String university;
 
+    private String document;
+
     private int phone;
 
+    private String photo;
+
     private String rol;
+
+    public UserDriverDTO(String name, String lastName, String email, String password, String university, String document, int phone, String photo,String rol) {
+        this.name = name;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.university = university;
+        this.document = document;
+        this.phone = phone;
+        this.photo = photo;
+        this.rol=rol;
+    }
 
     public String getName() {
         return name;
@@ -62,6 +74,14 @@ public abstract class User {
         this.university = university;
     }
 
+    public String getDocument() {
+        return document;
+    }
+
+    public void setDocument(String document) {
+        this.document = document;
+    }
+
     public int getPhone() {
         return phone;
     }
@@ -70,12 +90,12 @@ public abstract class User {
         this.phone = phone;
     }
 
-    public String getId() {
-        return id;
+    public String getPhoto() {
+        return photo;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 
     public String getRol() {
@@ -86,15 +106,11 @@ public abstract class User {
         this.rol = rol;
     }
 
-    public User(String id, String name, String lastName, String email, String password, String university, int phone, String rol) {
-        this.id = id;
-        this.name = name;
-        this.lastName = lastName;
-        this.email = email;
-        this.password = password;
-        this.university = university;
-        this.phone = phone;
-        this.rol = rol;
+    public String getId() {
+        return id;
     }
 
+    public void setId(String id) {
+        this.id = id;
+    }
 }

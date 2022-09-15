@@ -1,11 +1,7 @@
-package com.UNIWheels.entities;
+package com.UNIWheels.dto;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+public class UserTravelerDTO {
 
-public abstract class User {
-
-    @Id
     private String id;
 
     private String name;
@@ -20,7 +16,21 @@ public abstract class User {
 
     private int phone;
 
+    private String pay_methods;
+
     private String rol;
+
+
+    public UserTravelerDTO(String name, String lastName, String email, String password, String university, int phone, String pay_methods,String rol) {
+        this.name = name;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.university = university;
+        this.phone = phone;
+        this.pay_methods = pay_methods;
+        this.rol=rol;
+    }
 
     public String getName() {
         return name;
@@ -58,6 +68,7 @@ public abstract class User {
         return university;
     }
 
+
     public void setUniversity(String university) {
         this.university = university;
     }
@@ -68,6 +79,14 @@ public abstract class User {
 
     public void setPhone(int phone) {
         this.phone = phone;
+    }
+
+    public String getPay_methods() {
+        return pay_methods;
+    }
+
+    public void setPay_methods(String pay_methods) {
+        this.pay_methods = pay_methods;
     }
 
     public String getId() {
@@ -85,16 +104,4 @@ public abstract class User {
     public void setRol(String rol) {
         this.rol = rol;
     }
-
-    public User(String id, String name, String lastName, String email, String password, String university, int phone, String rol) {
-        this.id = id;
-        this.name = name;
-        this.lastName = lastName;
-        this.email = email;
-        this.password = password;
-        this.university = university;
-        this.phone = phone;
-        this.rol = rol;
-    }
-
 }
