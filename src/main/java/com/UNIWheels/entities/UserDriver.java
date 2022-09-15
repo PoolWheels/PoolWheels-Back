@@ -2,93 +2,36 @@ package com.UNIWheels.entities;
 
 import com.UNIWheels.dto.UserDriverDTO;
 import com.UNIWheels.dto.UserDriverDTO;
-import org.apache.catalina.User;
+import com.UNIWheels.dto.UserTravelerDTO;
+import org.apache.catalina.Group;
+import org.apache.catalina.Role;
+import org.apache.catalina.UserDatabase;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 
-@Document()
-public class UserDriver {
-    @Id
-    private String id;
+import java.util.Iterator;
 
-    private String name;
 
-    private  String lastName;
-
-    private  String email;
-
-    private  String password;
-
-    private String university;
+@Document
+public class UserDriver extends User {
 
     private String document;
+    private String photoCar;
+    private String modeloCar;
+    private String plate;
 
-    private int phone;
+    public UserDriver(UserDriverDTO userDriverDTO) {
 
-    private String photo;
-
-
-
-    public UserDriver(){}
-
-    public UserDriver(UserDriverDTO userDTO){
-        this.name = userDTO.getName();
-        this.lastName = userDTO.getLastName();
-        this.email = userDTO.getEmail();
-        this.password = userDTO.getPassword();
-        this.university = userDTO.getUniversity();
-        this.document = userDTO.getDocument();
-        this.phone = userDTO.getPhone();
-        this.photo = userDTO.getPhoto();
-
+        this(userDriverDTO.getId(), userDriverDTO.getName(), userDriverDTO.getLastName(), userDriverDTO.getEmail(), BCrypt.hashpw(userDriverDTO.getPassword(), BCrypt.gensalt()), userDriverDTO.getUniversity(), userDriverDTO.getPhone(), userDriverDTO.getRol());
+        setDocument(document);
+        setPhotoCar(photoCar);
+        setModeloCar(modeloCar);
+        setPlate(plate);
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getUniversity() {
-        return university;
-    }
-
-    public void setUniversity(String university) {
-        this.university = university;
+    public UserDriver(String id, String name, String lastName, String email, String password, String university, int phone, String rol) {
+        super(id, name, lastName, email, password, university, phone, rol);
     }
 
     public String getDocument() {
@@ -99,21 +42,27 @@ public class UserDriver {
         this.document = document;
     }
 
-    public int getPhone() {
-        return phone;
+    public String getPhotoCar() {
+        return photoCar;
     }
 
-    public void setPhone(int phone) {
-        this.phone = phone;
+    public void setPhotoCar(String photoCar) {
+        this.photoCar = photoCar;
     }
 
-    public String getPhoto() {
-        return photo;
+    public String getModeloCar() {
+        return modeloCar;
     }
 
-    public void setPhoto(String photo) {
-        this.photo = photo;
+    public void setModeloCar(String modeloCar) {
+        this.modeloCar = modeloCar;
     }
 
+    public String getPlate() {
+        return plate;
+    }
 
+    public void setPlate(String plate) {
+        this.plate = plate;
+    }
 }

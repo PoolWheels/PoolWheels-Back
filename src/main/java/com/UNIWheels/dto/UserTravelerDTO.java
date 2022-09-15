@@ -2,6 +2,8 @@ package com.UNIWheels.dto;
 
 public class UserTravelerDTO {
 
+    private String id;
+
     private String name;
 
     private  String lastName;
@@ -16,7 +18,10 @@ public class UserTravelerDTO {
 
     private String pay_methods;
 
-    public UserTravelerDTO(String name, String lastName, String email, String password, String university, int phone, String pay_methods) {
+    private String rol;
+
+
+    public UserTravelerDTO(String name, String lastName, String email, String password, String university, int phone, String pay_methods,String rol) {
         this.name = name;
         this.lastName = lastName;
         this.email = email;
@@ -24,6 +29,7 @@ public class UserTravelerDTO {
         this.university = university;
         this.phone = phone;
         this.pay_methods = pay_methods;
+        this.rol=rol;
     }
 
     public String getName() {
@@ -62,6 +68,7 @@ public class UserTravelerDTO {
         return university;
     }
 
+
     public void setUniversity(String university) {
         this.university = university;
     }
@@ -80,5 +87,21 @@ public class UserTravelerDTO {
 
     public void setPay_methods(String pay_methods) {
         this.pay_methods = pay_methods;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getRol() {
+        return rol;
+    }
+
+    public void setRol(String rol) {
+        this.rol = rol;
     }
 }
