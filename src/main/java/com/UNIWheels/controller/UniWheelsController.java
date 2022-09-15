@@ -1,6 +1,15 @@
 package com.UNIWheels.controller;
 
-import org.apache.catalina.LifecycleState;
+import com.UNIWheels.dto.PayMethodDto;
+import com.UNIWheels.dto.TripDto;
+import com.UNIWheels.dto.UserDriverDTO;
+import com.UNIWheels.dto.UserTravelerDTO;
+import com.UNIWheels.entities.Trip;
+import com.UNIWheels.entities.UserDriver;
+import com.UNIWheels.entities.UserTraveler;
+import com.UNIWheels.service.PayMethodService;
+import com.UNIWheels.service.TripService;
+import com.UNIWheels.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -8,6 +17,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.UNIWheels.entities.PayMethod;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 @RestController
@@ -96,7 +108,7 @@ public class UniWheelsController {
             if (payMethodTemp != null) {
                 return new ResponseEntity<PayMethodDto>(modelMapper.map(payMethodTemp, PayMethodDto.class), HttpStatus.CREATED);
             } else {
-                return new ResponseEntity<PayMethdDto>(HttpStatus.NOT_FOUND);
+                return new ResponseEntity<PayMethodDto>(HttpStatus.NOT_FOUND);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -118,7 +130,7 @@ public class UniWheelsController {
             if (payMethodTemp != null) {
                 return new ResponseEntity<PayMethodDto>(payMethodTemp, HttpStatus.OK);
             } else {
-                return new ResponseEntity<PayMethdDto>(HttpStatus.NOT_FOUND);
+                return new ResponseEntity<PayMethodDto>(HttpStatus.NOT_FOUND);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -259,64 +271,64 @@ public class UniWheelsController {
     /* Driver users services */
 
     @GetMapping("/api/v1/driverusers")
-    public ResponseEntity<List<UserDriverDto>> getAllDriverUsers () {
+    public ResponseEntity<List<UserDriverDTO>> getAllDriverUsers () {
         try {
             List<UserDriver> userDriverList = userService.getAllDriver();
-            ArrayList<UserDriverDto> data = new ArrayList<UserDriverDto>();
+            ArrayList<UserDriverDTO> data = new ArrayList<UserDriverDTO>();
             if (!userDriverList.isEmpty()) {
                 for (UserDriver ud : userDriverList) {
-                    data.add(modelMapper.map(ud, UserDriverDto.class));
+                    data.add(modelMapper.map(ud, UserDriverDTO.class));
                 }
             }
-            return new ResponseEntity<List<UserDriverDto>> (data, HttpStatus.OK);
+            return new ResponseEntity<List<UserDriverDTO>> (data, HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
-            return new ResponseEntity<List<UserDriverDto>> (HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<List<UserDriverDTO>> (HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @GetMapping("/api/v1/driverusers/{id}")
-    public ResponseEntity<UserDriverDto> getDriverUserById(@PathVariable String id) {
+    public ResponseEntity<UserDriverDTO> getDriverUserById(@PathVariable String id) {
         try {
             Trip tripTemp = userService.findByIdDriver(id);
             if (tripTemp != null) {
-                return new ResponseEntity<UserDriverDto>(modelMapper.map(tripTemp, UserDriverDto.class), HttpStatus.OK);
+                return new ResponseEntity<UserDriverDTO>(modelMapper.map(tripTemp, UserDriverDTO.class), HttpStatus.OK);
             } else {
-                return new ResponseEntity<UserDriverDto>(HttpStatus.NOT_FOUND);
+                return new ResponseEntity<UserDriverDTO>(HttpStatus.NOT_FOUND);
             }
         } catch (Exception e) {
             e.printStackTrace();
-            return new ResponseEntity<UserDriverDto>(HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<UserDriverDTO>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @PostMapping("/api/v1/driverusers")
-    public ResponseEntity<UserDriverDto> createNewDriverUser (@RequestBody UserDriverDto newUserDriverDto) {
+    public ResponseEntity<UserDriverDTO> createNewDriverUser (@RequestBody UserDriverDTO newUserDriverDTO) {
         try {
-            UserDriver userDriverTemp = userService.createUserDriver(modelMapper.map(newUserDriverDto, UserDriver.class));
+            UserDriver userDriverTemp = userService.createUserDriver(modelMapper.map(newUserDriverDTO, UserDriver.class));
             if (userDriverTemp != null) {
-                return new ResponseEntity<UserDriverDto>(modelMapper.map(userDriverTemp, UserDriverDto.class), HttpStatus.CREATED);
+                return new ResponseEntity<UserDriverDTO>(modelMapper.map(userDriverTemp, UserDriverDTO.class), HttpStatus.CREATED);
             } else {
-                return new ResponseEntity<UserDriverDto>(HttpStatus.NOT_FOUND);
+                return new ResponseEntity<UserDriverDTO>(HttpStatus.NOT_FOUND);
             }
         } catch (Exception e) {
             e.printStackTrace();
-            return new ResponseEntity<UserDriverDto>(HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<UserDriverDTO>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @PutMapping("/api/v1/driverusers/{id}")
-    public ResponseEntity<UserDriverDto> updateDriverUser (@RequestBody UserDriverDto userDriverDto, @PathVariable String id) {
+    public ResponseEntity<UserDriverDTO> updateDriverUser (@RequestBody UserDriverDTO UserDriverDTO, @PathVariable String id) {
         try {
-            UserDriver userDriverTemp = userService.updateDriver(modelMapper.map(userDriverDto, UserDriver.class), id);
+            UserDriver userDriverTemp = userService.updateDriver(modelMapper.map(UserDriverDTO, UserDriver.class), id);
             if (userDriverTemp != null) {
-                return new ResponseEntity<UserDriverDto>(userDriverTemp, HttpStatus.OK);
+                return new ResponseEntity<UserDriverDTO>(userDriverTemp, HttpStatus.OK);
             } else {
-                return new ResponseEntity<UserDriverDto>(HttpStatus.NOT_FOUND);
+                return new ResponseEntity<UserDriverDTO>(HttpStatus.NOT_FOUND);
             }
         } catch (Exception e) {
             e.printStackTrace();
-            return new ResponseEntity<UserDriverDto>(HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<UserDriverDTO>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -338,64 +350,64 @@ public class UniWheelsController {
     /* Traveler users services */
 
     @GetMapping("/api/v1/travelerusers")
-    public ResponseEntity<List<UserTravelerDto>> getAllTravelerUsers () {
+    public ResponseEntity<List<UserTravelerDTO>> getAllTravelerUsers () {
         try {
             List<UserTraveler> userTravelerList = userService.getAllTraveler();
-            ArrayList<UserTravelerDto> data = new ArrayList<UserTravelerDto>();
+            ArrayList<UserTravelerDTO> data = new ArrayList<UserTravelerDTO>();
             if (!userTravelerList.isEmpty()) {
                 for (UserTraveler ud : userTravelerList) {
-                    data.add(modelMapper.map(ud, UserTravelerDto.class));
+                    data.add(modelMapper.map(ud, UserTravelerDTO.class));
                 }
             }
-            return new ResponseEntity<List<UserTravelerDto>> (data, HttpStatus.OK);
+            return new ResponseEntity<List<UserTravelerDTO>> (data, HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
-            return new ResponseEntity<List<UserTravelerDto>> (HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<List<UserTravelerDTO>> (HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @GetMapping("/api/v1/travelerusers/{id}")
-    public ResponseEntity<UserTravelerDto> getTravelerUserById(@PathVariable String id) {
+    public ResponseEntity<UserTravelerDTO> getTravelerUserById(@PathVariable String id) {
         try {
             UserTraveler userTravelerTemp = userService.findByIdTraveler(id);
             if (userTravelerTemp != null) {
-                return new ResponseEntity<UserTravelerDto>(modelMapper.map(userTravelerTemp, UserTravelerDto.class), HttpStatus.OK);
+                return new ResponseEntity<UserTravelerDTO>(modelMapper.map(userTravelerTemp, UserTravelerDTO.class), HttpStatus.OK);
             } else {
-                return new ResponseEntity<UserTravelerDto>(HttpStatus.NOT_FOUND);
+                return new ResponseEntity<UserTravelerDTO>(HttpStatus.NOT_FOUND);
             }
         } catch (Exception e) {
             e.printStackTrace();
-            return new ResponseEntity<UserTravelerDto>(HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<UserTravelerDTO>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @PostMapping("/api/v1/travelerusers")
-    public ResponseEntity<UserTravelerDto> createNewTravelerUser (@RequestBody UserTravelerDto newUserTravelerDto) {
+    public ResponseEntity<UserTravelerDTO> createNewTravelerUser (@RequestBody UserTravelerDTO newUserTravelerDTO) {
         try {
-            UserTraveler userTravelerTemp = userService.createUserTraveler(modelMapper.map(newUserTravelerDto, UserTraveler.class));
+            UserTraveler userTravelerTemp = userService.createUserTraveler(modelMapper.map(newUserTravelerDTO, UserTraveler.class));
             if (userTravelerTemp != null) {
-                return new ResponseEntity<UserTravelerDto>(modelMapper.map(userTravelerTemp, UserTravelerDto.class), HttpStatus.CREATED);
+                return new ResponseEntity<UserTravelerDTO>(modelMapper.map(userTravelerTemp, UserTravelerDTO.class), HttpStatus.CREATED);
             } else {
-                return new ResponseEntity<UserTravelerDto>(HttpStatus.NOT_FOUND);
+                return new ResponseEntity<UserTravelerDTO>(HttpStatus.NOT_FOUND);
             }
         } catch (Exception e) {
             e.printStackTrace();
-            return new ResponseEntity<UserTravelerDto>(HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<UserTravelerDTO>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @PutMapping("/api/v1/travelerusers/{id}")
-    public ResponseEntity<UserTravelerDto> updateTravelerUser (@RequestBody UserTravelerDto userTravelerDto, @PathVariable String id) {
+    public ResponseEntity<UserTravelerDTO> updateTravelerUser (@RequestBody UserTravelerDTO UserTravelerDTO, @PathVariable String id) {
         try {
-            UserTraveler userTravelerTemp = userService.updateTraveler(modelMapper.map(UserTravelerDto, UserTraveler.class), id);
+            UserTraveler userTravelerTemp = userService.updateTraveler(modelMapper.map(UserTravelerDTO, UserTraveler.class), id);
             if (userTravelerTemp != null) {
-                return new ResponseEntity<UserTravelerDto>(userTravelerTemp, HttpStatus.OK);
+                return new ResponseEntity<UserTravelerDTO>(userTravelerTemp, HttpStatus.OK);
             } else {
-                return new ResponseEntity<UserTravelerDto>(HttpStatus.NOT_FOUND);
+                return new ResponseEntity<UserTravelerDTO>(HttpStatus.NOT_FOUND);
             }
         } catch (Exception e) {
             e.printStackTrace();
-            return new ResponseEntity<UserTravelerDto>(HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<UserTravelerDTO>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
