@@ -12,7 +12,7 @@ public interface TripService {
 
     List<Trip> getAll();
 
-    void deleteById( String id );
+    boolean deleteById( String id );
 
     Trip update( Trip trip, String id );
 
