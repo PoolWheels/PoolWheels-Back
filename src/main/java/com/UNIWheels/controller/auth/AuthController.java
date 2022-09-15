@@ -2,7 +2,9 @@ package com.UNIWheels.controller.auth;
 
 import com.UNIWheels.dto.LoginDto;
 import com.UNIWheels.dto.TokenDto;
+import com.UNIWheels.entities.User;
 import com.UNIWheels.exception.InvalidCredentialsException;
+import com.UNIWheels.service.UserService;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,7 +54,7 @@ public class AuthController
     private String generateToken( User user, Date expirationDate ) {
         return Jwts.builder()
                 .setSubject( user.getId() )
-                .claim( CLAIMS_ROLES_KEY, user.getRole())
+                .claim( CLAIMS_ROLES_KEY, user.getRol())
                 .setIssuedAt(new Date() )
                 .setExpiration( expirationDate )
                 .signWith( SignatureAlgorithm.HS256, secret )
