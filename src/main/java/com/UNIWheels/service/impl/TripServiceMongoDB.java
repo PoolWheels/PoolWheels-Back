@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.UNIWheels.entities.Trip;
-import com.UNIWheels.entities.User;
 import com.UNIWheels.repository.TripRepository;
 import com.UNIWheels.repository.UserDriverRepository;
 import com.UNIWheels.repository.UserTravelerRepository;
@@ -62,10 +61,12 @@ public class TripServiceMongoDB implements TripService{
      * It deletes a trip by its id
      * 
      * @param id The id of the trip to be deleted.
+     * @return 
      */
     @Override
-    public void deleteById(String id) {
+    public boolean deleteById(String id) {
         tripsRepository.deleteById(id);
+        return true;
     }
 
     /**

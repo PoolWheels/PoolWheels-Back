@@ -1,7 +1,6 @@
 package com.UNIWheels.entities;
 
 import com.UNIWheels.dto.UserTravelerDTO;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
