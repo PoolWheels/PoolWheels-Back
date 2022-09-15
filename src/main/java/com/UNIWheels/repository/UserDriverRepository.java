@@ -10,7 +10,4 @@ public interface UserDriverRepository extends MongoRepository<UserDriver,String>
 
     Optional<User> findByEmail(String email);
 
-
-
-
 }
