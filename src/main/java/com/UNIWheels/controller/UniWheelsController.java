@@ -128,7 +128,7 @@ public class UniWheelsController {
         try {
             PayMethod payMethodTemp = payMethodService.update(modelMapper.map(payMethodDto, PayMethod.class), id);
             if (payMethodTemp != null) {
-                return new ResponseEntity<PayMethodDto>(payMethodTemp, HttpStatus.OK);
+                return new ResponseEntity<PayMethodDto>(modelMapper.map(payMethodTemp, PayMethodDto.class), HttpStatus.OK);
             } else {
                 return new ResponseEntity<PayMethodDto>(HttpStatus.NOT_FOUND);
             }
@@ -237,7 +237,7 @@ public class UniWheelsController {
         try {
             Trip tripTemp = tripService.update(modelMapper.map(tripDto, Trip.class), id);
             if (tripTemp != null) {
-                return new ResponseEntity<TripDto>(tripTemp, HttpStatus.OK);
+                return new ResponseEntity<TripDto>(modelMapper.map(tripTemp, TripDto.class), HttpStatus.OK);
             } else {
                 return new ResponseEntity<TripDto>(HttpStatus.NOT_FOUND);
             }
@@ -270,6 +270,11 @@ public class UniWheelsController {
 
     /* Driver users services */
 
+    /**
+     * It gets all the driver users from the database and returns them as a list of UserDriverDTO objects
+     *
+     * @return A list of UserDriverDTO objects.
+     */
     @GetMapping("/api/v1/driverusers")
     public ResponseEntity<List<UserDriverDTO>> getAllDriverUsers () {
         try {
@@ -287,12 +292,18 @@ public class UniWheelsController {
         }
     }
 
+    /**
+     * This function is used to get a driver user by id
+     *
+     * @param id The id of the driver user you want to get.
+     * @return A UserDriverDTO object
+     */
     @GetMapping("/api/v1/driverusers/{id}")
     public ResponseEntity<UserDriverDTO> getDriverUserById(@PathVariable String id) {
         try {
-            Trip tripTemp = userService.findByIdDriver(id);
-            if (tripTemp != null) {
-                return new ResponseEntity<UserDriverDTO>(modelMapper.map(tripTemp, UserDriverDTO.class), HttpStatus.OK);
+            UserDriver userDriverTemp = userService.findByIdDriver(id);
+            if (userDriverTemp != null) {
+                return new ResponseEntity<UserDriverDTO>(modelMapper.map(userDriverTemp, UserDriverDTO.class), HttpStatus.OK);
             } else {
                 return new ResponseEntity<UserDriverDTO>(HttpStatus.NOT_FOUND);
             }
@@ -302,6 +313,12 @@ public class UniWheelsController {
         }
     }
 
+    /**
+     * The function creates a new driver user and returns the newly created user driver object
+     *
+     * @param newUserDriverDTO This is the object that will be passed in the request body.
+     * @return A ResponseEntity object is being returned.
+     */
     @PostMapping("/api/v1/driverusers")
     public ResponseEntity<UserDriverDTO> createNewDriverUser (@RequestBody UserDriverDTO newUserDriverDTO) {
         try {
@@ -317,12 +334,19 @@ public class UniWheelsController {
         }
     }
 
+    /**
+     * This function updates a driver user in the database
+     *
+     * @param UserDriverDTO The object that will be sent to the server.
+     * @param id The id of the user to be updated.
+     * @return A response entity with a user driver DTO and a status code of OK.
+     */
     @PutMapping("/api/v1/driverusers/{id}")
     public ResponseEntity<UserDriverDTO> updateDriverUser (@RequestBody UserDriverDTO UserDriverDTO, @PathVariable String id) {
         try {
             UserDriver userDriverTemp = userService.updateDriver(modelMapper.map(UserDriverDTO, UserDriver.class), id);
             if (userDriverTemp != null) {
-                return new ResponseEntity<UserDriverDTO>(userDriverTemp, HttpStatus.OK);
+                return new ResponseEntity<UserDriverDTO>(modelMapper.map(userDriverTemp, UserDriverDTO.class), HttpStatus.OK);
             } else {
                 return new ResponseEntity<UserDriverDTO>(HttpStatus.NOT_FOUND);
             }
@@ -332,6 +356,12 @@ public class UniWheelsController {
         }
     }
 
+    /**
+     * It deletes a driver user from the database.
+     *
+     * @param id The id of the driver user to be deleted.
+     * @return A boolean value is being returned.
+     */
     @DeleteMapping("/api/v1/driverusers/{id}")
     public ResponseEntity<Boolean> deleteDriverUser (@PathVariable String id) {
         try {
@@ -349,6 +379,11 @@ public class UniWheelsController {
 
     /* Traveler users services */
 
+    /**
+     * This function is used to get all the traveler users from the database
+     *
+     * @return A list of all the traveler users in the database.
+     */
     @GetMapping("/api/v1/travelerusers")
     public ResponseEntity<List<UserTravelerDTO>> getAllTravelerUsers () {
         try {
@@ -366,6 +401,12 @@ public class UniWheelsController {
         }
     }
 
+    /**
+     * This function is used to get a traveler user by id
+     *
+     * @param id The id of the user to be retrieved.
+     * @return A UserTravelerDTO object is being returned.
+     */
     @GetMapping("/api/v1/travelerusers/{id}")
     public ResponseEntity<UserTravelerDTO> getTravelerUserById(@PathVariable String id) {
         try {
@@ -381,6 +422,12 @@ public class UniWheelsController {
         }
     }
 
+    /**
+     * This function creates a new traveler user and returns the newly created user's information in the response body
+     *
+     * @param newUserTravelerDTO This is the object that will be passed in the request body.
+     * @return A new user traveler is being returned.
+     */
     @PostMapping("/api/v1/travelerusers")
     public ResponseEntity<UserTravelerDTO> createNewTravelerUser (@RequestBody UserTravelerDTO newUserTravelerDTO) {
         try {
@@ -396,12 +443,19 @@ public class UniWheelsController {
         }
     }
 
+    /**
+     * This function updates a traveler user in the database
+     *
+     * @param UserTravelerDTO The object that will be updated.
+     * @param id The id of the user to be updated.
+     * @return The method returns a ResponseEntity<UserTravelerDTO> object.
+     */
     @PutMapping("/api/v1/travelerusers/{id}")
     public ResponseEntity<UserTravelerDTO> updateTravelerUser (@RequestBody UserTravelerDTO UserTravelerDTO, @PathVariable String id) {
         try {
             UserTraveler userTravelerTemp = userService.updateTraveler(modelMapper.map(UserTravelerDTO, UserTraveler.class), id);
             if (userTravelerTemp != null) {
-                return new ResponseEntity<UserTravelerDTO>(userTravelerTemp, HttpStatus.OK);
+                return new ResponseEntity<UserTravelerDTO>(modelMapper.map(userTravelerTemp, UserTravelerDTO.class), HttpStatus.OK);
             } else {
                 return new ResponseEntity<UserTravelerDTO>(HttpStatus.NOT_FOUND);
             }
@@ -411,6 +465,12 @@ public class UniWheelsController {
         }
     }
 
+    /**
+     * This function deletes a traveler user from the database
+     *
+     * @param id The id of the traveler user to be deleted.
+     * @return A boolean value is being returned.
+     */
     @DeleteMapping("/api/v1/travelerusers/{id}")
     public ResponseEntity<Boolean> deleteTravelerUser (@PathVariable String id) {
         try {
