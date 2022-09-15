@@ -30,6 +30,14 @@ public class Comment {
         this.type = type;
     }
 
+    public Comment(String user, Date creationDate, Date modificationDate, String description, String type) {
+        this.user = user;
+        this.creationDate = creationDate;
+        this.modificationDate = modificationDate;
+        this.description = description;
+        this.type = type;
+    }
+
     /**
      * This function returns the id of the current object
      *
