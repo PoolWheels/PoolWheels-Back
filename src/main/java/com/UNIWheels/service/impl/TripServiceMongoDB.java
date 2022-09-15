@@ -96,7 +96,7 @@ public class TripServiceMongoDB implements TripService{
     @Override
     public boolean fullQuotas( String idTrip ) {
         Trip trip = findById(idTrip);
-        if(trip.getAvailableSeats() == trip.getPassengers().size()){ 
+        if(trip.getAvailableSeats().get() == trip.getPassengers().size()){ 
             trip.setActive(false);
             return false;
         }
@@ -107,9 +107,9 @@ public class TripServiceMongoDB implements TripService{
     @Override
     public void removeReservation(String idTrip, String idUser) {
         Trip trip = findById(idTrip);
-        User user = 
-        ArrayList<User> passengers = trip.getPassengers();
-        passengers.remove();
+        //User user = 
+        //ArrayList<User> passengers = trip.getPassengers();
+        //passengers.remove();
     }
     
     

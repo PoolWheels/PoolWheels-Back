@@ -89,11 +89,11 @@ public class Trip {
         this.addrFin = addrFin;
     }
 
-    public Integer getAvailableSeats() {
+    public AtomicInteger getAvailableSeats() {
         return availableSeats;
     }
 
-    public void setAvailableSeats(Integer availableSeats) {
+    public void setAvailableSeats(AtomicInteger availableSeats) {
         this.availableSeats = availableSeats;
     }
 
