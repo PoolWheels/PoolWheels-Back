@@ -1,7 +1,10 @@
 package com.UNIWheels.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
+import com.UNIWheels.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -88,6 +91,27 @@ public class TripServiceMongoDB implements TripService{
     }
 
     /**
+     * > This function adds a user to the list of passengers of a trip
+     *
+     * @param idTrip the id of the trip that the user wants to reserve
+     * @param idUser the id of the user who wants to reserve a seat
+     * @return A boolean value.
+     */
+    @Override
+    public boolean reservation(String idTrip, String idUser) {
+        Trip trip = findById(idTrip);
+        ArrayList<String> passengers = trip.getPassengers();
+        boolean added = passengers.add(idUser);
+        if (added) {
+            trip.setPassengers(passengers);
+            update(trip, trip.getId());
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * If the number of available seats is equal to the number of passengers, return false, otherwise
      * return true.
      * 
@@ -104,15 +128,24 @@ public class TripServiceMongoDB implements TripService{
         return true;
     }
 
-    
+    /**
+     * > The function removes a user from the list of passengers of a trip
+     *
+     * @param idTrip the id of the trip
+     * @param idUser the id of the user who wants to reserve a seat
+     * @return A boolean value.
+     */
     @Override
-    public void removeReservation(String idTrip, String idUser) {
+    public boolean removeReservation(String idTrip, String idUser) {
         Trip trip = findById(idTrip);
-        //User user = 
-        //ArrayList<User> passengers = trip.getPassengers();
-        //passengers.remove();
+        ArrayList<String> passengers = trip.getPassengers();
+        boolean removed = passengers.remove(idUser);
+        if (removed) {
+            trip.setPassengers(passengers);
+            update(trip, trip.getId());
+            return true;
+        } else {
+            return false;
+        }
     }
-    
-    
-    
 }
