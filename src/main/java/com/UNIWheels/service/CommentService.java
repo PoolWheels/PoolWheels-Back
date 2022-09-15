@@ -1,4 +1,4 @@
-package com.UNIWheels.services;
+package com.UNIWheels.service;
 
 import com.UNIWheels.entities.Comment;
 

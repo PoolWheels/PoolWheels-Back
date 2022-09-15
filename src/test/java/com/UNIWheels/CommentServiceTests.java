@@ -1,14 +1,13 @@
 package com.UNIWheels;
 
 import com.UNIWheels.entities.Comment;
-import com.UNIWheels.services.CommentService;
+import com.UNIWheels.service.CommentService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;

@@ -1,6 +1,5 @@
 package com.UNIWheels.entities;
 
-import com.UNIWheels.enums.CommentTypeEnum;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 

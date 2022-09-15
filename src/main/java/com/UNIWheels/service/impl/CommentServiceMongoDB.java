@@ -1,14 +1,13 @@
-package com.UNIWheels.services.impl;
+package com.UNIWheels.service.impl;
 
 import com.UNIWheels.entities.Comment;
 import com.UNIWheels.repository.CommentRepository;
-import com.UNIWheels.services.CommentService;
+import com.UNIWheels.service.CommentService;
 import com.mongodb.DuplicateKeyException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * > This class is a service that implements the CommentService interface
