@@ -287,11 +287,40 @@ public class UniWheelsController {
         }
     }
 
+    /**
+     * The function receives the id of the trip and the id of the passenger, and returns a boolean value indicating whether
+     * the reservation was successful or not
+     *
+     * @param idTrip The id of the trip that the passenger wants to reserve.
+     * @param idPassenger The passenger's ID.
+     * @return A boolean value.
+     */
+    @PostMapping("/api/v1/trips/{idTrip}/passengers/{idPassenger}")
+    public ResponseEntity<Boolean> doReservartion (@PathVariable String idTrip, @PathVariable String idPassenger) {
+        try {
+            boolean reserved = tripService.reservation(idTrip, idPassenger);
+            if (reserved) {
+                return new ResponseEntity<Boolean>(true, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<Boolean>(false, HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<Boolean>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    /**
+     * It removes a passenger from a trip.
+     *
+     * @param idTrip the id of the trip
+     * @param idPassenger The id of the passenger to be removed from the trip.
+     * @return A boolean value.
+     */
     @DeleteMapping("/api/v1/trips/{idTrip}/passengers/{idPassenger}")
     public ResponseEntity<Boolean> removePassengerReservation (@PathVariable String idTrip, @PathVariable String idPassenger) {
         try {
-            //boolean removed = tripService.removeReservation(idTrip, idPassenger);
-            boolean removed = true;
+            boolean removed = tripService.removeReservation(idTrip, idPassenger);
             if (removed) {
                 return new ResponseEntity<Boolean>(true, HttpStatus.OK);
             } else {
@@ -523,6 +552,11 @@ public class UniWheelsController {
 
     /* Comments services */
 
+    /**
+     * It gets all the comments from the database and returns them as a list of CommentDto objects
+     *
+     * @return A list of comments
+     */
     @GetMapping("/api/v1/comments")
     public ResponseEntity<List<CommentDto>> getAllComments () {
         try {
@@ -540,6 +574,12 @@ public class UniWheelsController {
         }
     }
 
+    /**
+     * It returns a CommentDto object if the comment exists, or a 404 if it doesn't, or a 500 if something goes wrong
+     *
+     * @param id The id of the comment to be retrieved.
+     * @return A comment with the given id.
+     */
     @GetMapping("/api/v1/comments/{id}")
     public ResponseEntity<CommentDto> getCommentById(@PathVariable String id) {
         try {
@@ -555,6 +595,13 @@ public class UniWheelsController {
         }
     }
 
+    /**
+     * It takes a CommentDto object as a parameter, converts it to a Comment object, and then passes it to the create()
+     * function in the CommentService class
+     *
+     * @param newCommentDto The new comment that we want to create.
+     * @return A new comment is being returned.
+     */
     @PostMapping("/api/v1/comments")
     public ResponseEntity<CommentDto> createNewComment (@RequestBody CommentDto newCommentDto) {
         try {
@@ -570,6 +617,13 @@ public class UniWheelsController {
         }
     }
 
+    /**
+     * It updates a comment with the given id.
+     *
+     * @param commentDto The object that will be updated.
+     * @param id The id of the comment to be updated.
+     * @return A ResponseEntity object is being returned.
+     */
     @PutMapping("/api/v1/comments/{id}")
     public ResponseEntity<CommentDto> updateComment (@RequestBody CommentDto commentDto, @PathVariable String id) {
         try {
@@ -585,6 +639,12 @@ public class UniWheelsController {
         }
     }
 
+    /**
+     * It deletes a comment by id.
+     *
+     * @param id The id of the comment to be deleted
+     * @return A boolean value is being returned.
+     */
     @DeleteMapping("/api/v1/comments/{id}")
     public ResponseEntity<Boolean> deleteComment (@PathVariable String id) {
         try {
@@ -599,4 +659,5 @@ public class UniWheelsController {
             return new ResponseEntity<Boolean>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
 }
