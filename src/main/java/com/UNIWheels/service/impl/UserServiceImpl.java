@@ -108,6 +108,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findByEmail(String email) {
+        System.out.println("USERS...."+ userDriverRepository.findAll());
+        System.out.println("USERS...."+ userTravelerRepository.findAll());
 
         if (userDriverRepository.findByEmail(email).isPresent()){
             System.out.println("User found in driver");
