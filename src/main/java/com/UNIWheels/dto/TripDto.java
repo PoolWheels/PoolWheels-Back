@@ -3,7 +3,7 @@ package com.UNIWheels.dto;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class TripsDto {
+public class TripDto {
     
     private String id;
     private String driver;
@@ -17,12 +17,12 @@ public class TripsDto {
     private boolean active = false;
 
     // It's a constructor.
-    public TripsDto(){
+    public TripDto(){
         this.id = String.valueOf((int)(Math.random()*9));
     }
 
     // It's a constructor.
-    public TripsDto(String driver, String addrInit, String addrFin, Integer availableSeats,
+    public TripDto(String driver, String addrInit, String addrFin, Integer availableSeats,
             HashMap<String, Integer> stops, ArrayList<String> passengers, String initTime, String finTime,
             boolean active) {
         this();
@@ -38,7 +38,7 @@ public class TripsDto {
     }
 
     // It's a constructor.
-    public TripsDto(String id, String driver, String addrInit, String addrFin, Integer availableSeats,
+    public TripDto(String id, String driver, String addrInit, String addrFin, Integer availableSeats,
             HashMap<String, Integer> stops, ArrayList<String> passengers, String initTime, String finTime,
             boolean active) {
         this(driver, addrInit, addrFin, availableSeats, stops, passengers, initTime, finTime, active);

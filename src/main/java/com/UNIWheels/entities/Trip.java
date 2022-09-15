@@ -6,13 +6,13 @@ import java.util.HashMap;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import com.UNIWheels.dto.TripsDto;
+import com.UNIWheels.dto.TripDto;
 
 @Document
 /**
  * It's a class that represents a trip.
  */
-public class Trips {
+public class Trip {
 
     @Id
     private String id;
@@ -27,12 +27,12 @@ public class Trips {
     private boolean active = false;
 
     // Generating a random number between 0 and 9 and assigning it to the id.
-    public Trips(){
+    public Trip(){
         this.id = String.valueOf((int)(Math.random()*9));
     }
 
     // It's a constructor.
-    public Trips(String driver, String addrInit, String addrFin, Integer availableSeats, HashMap<String, Integer> stops,
+    public Trip(String driver, String addrInit, String addrFin, Integer availableSeats, HashMap<String, Integer> stops,
             ArrayList<String> passengers, String initTime) {
         this();
         this.driver = driver;
@@ -45,7 +45,7 @@ public class Trips {
     }
 
     // It's a constructor.
-    public Trips(TripsDto dto) {
+    public Trip(TripDto dto) {
         this.id = dto.getId();
         this.driver = dto.getDriver();
         this.addrInit = dto.getAddrInit();

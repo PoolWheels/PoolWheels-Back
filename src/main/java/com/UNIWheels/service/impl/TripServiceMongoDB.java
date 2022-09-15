@@ -5,16 +5,16 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.UNIWheels.entities.Trips;
-import com.UNIWheels.repository.TripsRepository;
-import com.UNIWheels.service.TripsService;
+import com.UNIWheels.entities.Trip;
+import com.UNIWheels.repository.TripRepository;
+import com.UNIWheels.service.TripService;
 
 @Service
-public class TripsServiceMongoDB implements TripsService{
+public class TripServiceMongoDB implements TripService{
 
-    private final TripsRepository tripsRepository;
+    private final TripRepository tripsRepository;
 
-    public TripsServiceMongoDB ( @Autowired TripsRepository tripsRepository ){
+    public TripServiceMongoDB ( @Autowired TripRepository tripsRepository ){
         this.tripsRepository = tripsRepository;
     }
 
@@ -25,7 +25,7 @@ public class TripsServiceMongoDB implements TripsService{
      * @return The trip object is being returned.
      */
     @Override
-    public Trips create(Trips trip) {
+    public Trip create(Trip trip) {
         tripsRepository.save(trip);
         return trip;
     }
@@ -37,7 +37,7 @@ public class TripsServiceMongoDB implements TripsService{
      * @return The method is returning the trip object that is found by the id.
      */
     @Override
-    public Trips findById(String id) {
+    public Trip findById(String id) {
         return tripsRepository.findById(id).get();
     }
 
@@ -47,7 +47,7 @@ public class TripsServiceMongoDB implements TripsService{
      * @return A list of trips
      */
     @Override
-    public List<Trips> getAll() {
+    public List<Trip> getAll() {
         return tripsRepository.findAll();
     }
 
@@ -74,7 +74,7 @@ public class TripsServiceMongoDB implements TripsService{
      * @return The trip object is being returned.
      */
     @Override
-    public Trips update(Trips trip, String id) {
+    public Trip update(Trip trip, String id) {
         create(trip);
         return findById(id);
     }
@@ -88,7 +88,7 @@ public class TripsServiceMongoDB implements TripsService{
      */
     @Override
     public boolean fullQuotas( String idTrip ) {
-        Trips trip = findById(idTrip);
+        Trip trip = findById(idTrip);
         if(trip.getAvailableSeats() == trip.getPassengers().size()){ 
             trip.setActive(false);
             return false;
@@ -96,10 +96,14 @@ public class TripsServiceMongoDB implements TripsService{
         return true;
     }
 
+    /**
     @Override
-    public void removeReservation(String idTrip) {
-        
+    public void removeReservation(String idTrip, String idUser) {
+        Trips trip = findById(idTrip);
+        ArrayList<User> passengers = trip.getPassengers();
+        passengers.remove();
     }
+    */
     
     
 }
