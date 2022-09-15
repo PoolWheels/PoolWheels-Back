@@ -85,15 +85,25 @@ public abstract class User {
         this.rol = rol;
     }
 
-    public User(String id, String name, String lastName, String email, String password, String university, int phone, String rol) {
-        this.id = id;
+
+    public User(){
+        this.id = String.valueOf((int)(Math.random()*5));
+    }
+
+    public User(String name,String lastName, String email, String password, String university, int phone, String rol){
+        this();
         this.name = name;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
-        this.university = university;
+        this.university=university;
         this.phone = phone;
         this.rol = rol;
+    }
+
+    public User(String id, String name,String lastName, String email, String password, String university, int phone, String rol){
+        this(name,lastName, email,password, university, phone, rol);
+        this.id = id;
     }
 
 }

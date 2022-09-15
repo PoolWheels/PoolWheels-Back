@@ -20,18 +20,35 @@ public class UserDriverDTO {
 
     private String photo;
 
+    private String modeloCar;
+
+    private String plate;
+
     private String rol;
 
-    public UserDriverDTO(String name, String lastName, String email, String password, String university, String document, int phone, String photo,String rol) {
+
+    public UserDriverDTO(){
+        this.id = String.valueOf((int)(Math.random()*5));
+    }
+
+    public UserDriverDTO(String name,String lastName, String email, String password, String university, int phone, String rol, String photo, String modelCar, String plate, String document){
+        this();
         this.name = name;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
-        this.university = university;
-        this.document = document;
+        this.university=university;
         this.phone = phone;
-        this.photo = photo;
-        this.rol=rol;
+        this.rol = rol;
+        this.document = document;
+        this.photo= photo;
+        this.modeloCar = modelCar;
+        this.plate = plate;
+    }
+
+    public UserDriverDTO(String id, String name,String lastName, String email, String password, String university, int phone, String rol, String photo, String modelCar, String plate, String document){
+        this(name,lastName, email,password, university, phone,rol, photo , modelCar, plate, document);
+        this.id = id;
     }
 
     public String getName() {
@@ -112,5 +129,21 @@ public class UserDriverDTO {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getModeloCar() {
+        return modeloCar;
+    }
+
+    public void setModeloCar(String modeloCar) {
+        this.modeloCar = modeloCar;
+    }
+
+    public String getPlate() {
+        return plate;
+    }
+
+    public void setPlate(String plate) {
+        this.plate = plate;
     }
 }

@@ -13,13 +13,15 @@ public class UserDriver extends User {
     private String modeloCar;
     private String plate;
 
-    public UserDriver(UserDriverDTO userDriverDTO) {
+    public UserDriver() {
+    }
 
+    public UserDriver(UserDriverDTO userDriverDTO) {
         this(userDriverDTO.getId(), userDriverDTO.getName(), userDriverDTO.getLastName(), userDriverDTO.getEmail(), BCrypt.hashpw(userDriverDTO.getPassword(), BCrypt.gensalt()), userDriverDTO.getUniversity(), userDriverDTO.getPhone(), userDriverDTO.getRol());
-        setDocument(document);
-        setPhotoCar(photoCar);
-        setModeloCar(modeloCar);
-        setPlate(plate);
+        this.document = userDriverDTO.getDocument();
+        this.photoCar= userDriverDTO.getPhoto();
+        this.modeloCar = userDriverDTO.getModeloCar();
+        this.plate = userDriverDTO.getPlate();
     }
 
     public UserDriver(String id, String name, String lastName, String email, String password, String university, int phone, String rol) {
