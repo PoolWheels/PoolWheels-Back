@@ -3,6 +3,7 @@ package com.UNIWheels.service;
 import java.util.List;
 
 import com.UNIWheels.entities.Trip;
+import com.UNIWheels.entities.User;
 
 public interface TripService {
 
@@ -16,10 +17,10 @@ public interface TripService {
 
     Trip update( Trip trip, String id );
 
-    //void reservation( Users user);
+    boolean reservation(String trip, String user);
 
     boolean fullQuotas( String idTrip );
 
-    void removeReservation( String idTrip, String idUser );
+    boolean removeReservation(String idTrip, String idUser );
     
 }
