@@ -17,6 +17,14 @@ dependencies {
 	implementation group: 'org.modelmapper', name: 'modelmapper', version: '3.1.0'
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	//Dependencies for JWT
+	implementation 'javax.ws.rs:javax.ws.rs-api:2.0'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'io.jsonwebtoken:jjwt:0.9.1'
+	//JWT: javax
+	implementation 'javax.ws.rs:javax.ws.rs-api'
+	implementation 'javax.xml.bind:jaxb-api'
 	implementation 'org.springframework.security:spring-security-crypto'
 }
 

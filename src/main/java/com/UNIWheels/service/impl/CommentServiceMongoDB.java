@@ -66,8 +66,13 @@ public class CommentServiceMongoDB implements CommentService {
      * @param id The id of the comment to be deleted.
      */
     @Override
-    public void deleteById(String id) {
-        commentRepository.deleteById(id);
+    public boolean deleteById(String id) {
+        try {
+            commentRepository.deleteById(id);
+            return true;
+        }catch (IllegalArgumentException e){
+            return false;
+        }
     }
 
     /**
