@@ -110,9 +110,10 @@ public class UserServiceImpl implements UserService {
     public User findByEmail(String email) {
 
         if (userDriverRepository.findByEmail(email).isPresent()){
+            System.out.println("User found in driver");
             return userDriverRepository.findByEmail(email).get();
-
         } else if(userTravelerRepository.findByEmail(email).isPresent()){
+            System.out.println("User found in traveler");
             return userTravelerRepository.findByEmail(email).get();
         } else
             return null;
