@@ -117,6 +117,18 @@ To download the project run:
 ![getTripById](img/getTripById.png)
 
 
+7. Add a new comment
+
+**Type**: POST
+
+**Url**: http://localhost:8080/api/v1/comments
+
+```json
+{"user": "0001", "creationDate": "2022-09-15", "modificationDate": "2022-09-15", "description": "Es un muy bien servicio", "type": "COMPLAINT"}
+```
+
+![addNewComment](img/createComment.png)
+
 
 ## Built With
 
