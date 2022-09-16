@@ -1,8 +1,10 @@
 package com.UNIWheels.service.impl;
 
 import java.util.ArrayList;
+import java.util.DuplicateFormatFlagsException;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import com.UNIWheels.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,7 @@ import com.UNIWheels.repository.TripRepository;
 import com.UNIWheels.repository.UserDriverRepository;
 import com.UNIWheels.repository.UserTravelerRepository;
 import com.UNIWheels.service.TripService;
+import com.mongodb.DuplicateKeyException;
 
 @Service
 public class TripServiceMongoDB implements TripService{
@@ -35,8 +38,14 @@ public class TripServiceMongoDB implements TripService{
      */
     @Override
     public Trip create(Trip trip) {
-        tripsRepository.save(trip);
-        return trip;
+        try{
+        tripsRepository.insert(trip);
+        Optional<Trip> tripTemp = tripsRepository.findById(trip.getId());
+        return tripTemp.orElse(null);
+        } catch (DuplicateKeyException e){
+            System.out.println("The specified id is already registered");
+            return null;
+        }
     }
 
     /**
