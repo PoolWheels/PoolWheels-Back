@@ -9,22 +9,28 @@ import java.util.Date;
 public class CommentDto {
 
     private String id;
-    private User user;
+    private String user;
     private Date creationDate;
     private Date modificationDate;
     private String description;
     private CommentTypeEnum type;
 
     public CommentDto() {
+        this.id = String.valueOf((int)(Math.random()*5));
     }
 
-    public CommentDto(String id, User user, Date creationDate, Date modificationDate, String description, CommentTypeEnum type) {
-        this.id = id;
+    public CommentDto(String user, Date creationDate, Date modificationDate, String description, CommentTypeEnum type) {
+        this();
         this.user = user;
         this.creationDate = creationDate;
         this.modificationDate = modificationDate;
         this.description = description;
         this.type = type;
+    }
+
+    public CommentDto(String id, String user, Date creationDate, Date modificationDate, String description, CommentTypeEnum type) {
+        this(user, creationDate, modificationDate, description, type);
+        this.id = id;
     }
 
     /**
@@ -50,7 +56,7 @@ public class CommentDto {
      *
      * @return The user object.
      */
-    public User getUser() {
+    public String getUser() {
         return user;
     }
 
@@ -59,7 +65,7 @@ public class CommentDto {
      *
      * @param user The user object that will be used to create the new user.
      */
-    public void setUser(User user) {
+    public void setUser(String user) {
         this.user = user;
     }
 
@@ -135,5 +141,7 @@ public class CommentDto {
     public void setType(CommentTypeEnum type) {
         this.type = type;
     }
+
+
 }
 

@@ -1,5 +1,7 @@
 package com.UNIWheels.entities;
 
+import com.UNIWheels.dto.CommentDto;
+import com.UNIWheels.enums.CommentTypeEnum;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -18,23 +20,30 @@ public class Comment {
     private String type;
 
     public Comment() {
+        this.id = String.valueOf((int)(Math.random()*5));
     }
 
-    public Comment(String id, String user, Date creationDate, Date modificationDate, String description, String type) {
-        this.id = id;
-        this.user = user;
-        this.creationDate = creationDate;
-        this.modificationDate = modificationDate;
-        this.description = description;
-        this.type = type;
+    public Comment(CommentDto commentDto) {
+        this.id = commentDto.getId();
+        this.user = commentDto.getUser().toString();
+        this.creationDate = commentDto.getCreationDate();
+        this.modificationDate = commentDto.getModificationDate();
+        this.description = commentDto.getDescription();
+        this.type = commentDto.getType().toString();
     }
 
     public Comment(String user, Date creationDate, Date modificationDate, String description, String type) {
+        this();
         this.user = user;
         this.creationDate = creationDate;
         this.modificationDate = modificationDate;
         this.description = description;
         this.type = type;
+    }
+
+    public Comment(String id, String user, Date creationDate, Date modificationDate, String description, String type) {
+        this(user, creationDate, modificationDate, description, type);
+        this.id = id;
     }
 
     /**
@@ -144,4 +153,5 @@ public class Comment {
     public void setType(String type) {
         this.type = type;
     }
+
 }
