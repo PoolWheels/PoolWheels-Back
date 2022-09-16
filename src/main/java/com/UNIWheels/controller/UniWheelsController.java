@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 
 @RestController
@@ -87,6 +88,9 @@ public class UniWheelsController {
             } else {
                 return new ResponseEntity<PayMethodDto>(HttpStatus.NOT_FOUND);
             }
+        } catch (NoSuchElementException nsee) {
+            System.out.println("\nDoesn´t exist a payment method with the specified id");
+            return new ResponseEntity<PayMethodDto>(HttpStatus.NOT_FOUND);
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<PayMethodDto>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -196,6 +200,9 @@ public class UniWheelsController {
             } else {
                 return new ResponseEntity<TripDto>(HttpStatus.NOT_FOUND);
             }
+        } catch (NoSuchElementException nsee) {
+            System.out.println("\nDoesn´t exist a trip with the specified id");
+            return new ResponseEntity<TripDto>(HttpStatus.NOT_FOUND);
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<TripDto>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -371,7 +378,10 @@ public class UniWheelsController {
             } else {
                 return new ResponseEntity<UserDriverDTO>(HttpStatus.NOT_FOUND);
             }
-        } catch (Exception e) {
+        } catch (NoSuchElementException nsee) {
+            System.out.println("\nDoesn´t exist a driver user with the specified id");
+            return new ResponseEntity<UserDriverDTO>(HttpStatus.NOT_FOUND);
+        }catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<UserDriverDTO>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -480,7 +490,10 @@ public class UniWheelsController {
             } else {
                 return new ResponseEntity<UserTravelerDTO>(HttpStatus.NOT_FOUND);
             }
-        } catch (Exception e) {
+        } catch (NoSuchElementException nsee) {
+            System.out.println("\nDoesn´t exist traveler users with the specified id");
+            return new ResponseEntity<UserTravelerDTO>(HttpStatus.NOT_FOUND);
+        }catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<UserTravelerDTO>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
