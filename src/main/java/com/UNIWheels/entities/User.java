@@ -2,7 +2,9 @@ package com.UNIWheels.entities;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.security.crypto.bcrypt.BCrypt;
-
+/**
+ * The class Abstract User is a document that has an id, a name, an last name, a email, a password,a university,a phone,and a rol.
+ */
 public abstract class User {
 
     @Id

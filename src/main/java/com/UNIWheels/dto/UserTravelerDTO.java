@@ -1,5 +1,7 @@
 package com.UNIWheels.dto;
-
+/**
+ * A DTO class that represents a UserTraveler.
+ */
 public class UserTravelerDTO {
 
     private String id;
