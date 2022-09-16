@@ -4,7 +4,9 @@ import com.UNIWheels.dto.UserDriverDTO;
 import com.UNIWheels.dto.UserTravelerDTO;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.crypto.bcrypt.BCrypt;
-
+/**
+ * The class  UserTraveler has a pay_methods.
+ */
 @Document
 public class UserTraveler extends User {
 
