@@ -11,6 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
+/*
+*This class is a service that implements the UserService interface
+*/
 
 @Service
 public class UserServiceImpl implements UserService {
