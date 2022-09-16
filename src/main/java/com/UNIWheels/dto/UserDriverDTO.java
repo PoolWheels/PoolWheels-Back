@@ -1,5 +1,8 @@
 package com.UNIWheels.dto;
 
+/**
+ * A DTO class that represents a UserDriver.
+ */
 public class UserDriverDTO {
 
     private String id;

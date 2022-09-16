@@ -2,11 +2,11 @@ package com.UNIWheels.service;
 
 // This is importing the PayMethods class and the List class.
 import com.UNIWheels.entities.PayMethod;
-
 import java.util.List;
 
 // This is the interface for the PayMethodsService. It is a contract that says that any class that implements this
-// interface must have these methods.
+// interface must have these methods
+
 public interface PayMethodService {
 
     PayMethod create(PayMethod user );

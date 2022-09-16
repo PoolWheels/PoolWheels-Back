@@ -3,7 +3,9 @@ package com.UNIWheels.entities;
 import com.UNIWheels.dto.UserDriverDTO;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.crypto.bcrypt.BCrypt;
-
+/**
+ * The class  UserDrive is a document that extends of the class User, this classs contain document,phtotocar,mdoelcar and plate.
+ */
 
 @Document
 public class UserDriver extends User {
