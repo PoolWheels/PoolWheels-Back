@@ -7,6 +7,7 @@
 - José Manuel Gamboa Gómez
 - Kristhian Segura Guatibonza
 - Zuly Valentina Vargas Ramírez
+- Natalia Orjuela Hernandez
 
 
 ## Description
