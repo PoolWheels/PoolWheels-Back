@@ -13,8 +13,8 @@
 ## Description
 
 PoolWheels offers ridesharing between trusted users in a fast and easy way, you can find your ideal ride at a very low price and why not save while driving.
-Post your next round trip on UniWheels and get income.
-With UniWheels you can travel in the company of people you know who study at the same university and have to travel the same route as you to get home.
+Post your next round trip on PoolWheels and get income.
+With PoolWheels you can travel in the company of people you know who study at the same university and have to travel the same route as you to get home.
 
 This repository includes the backend development of the application. 
 
