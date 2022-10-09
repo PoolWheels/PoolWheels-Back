@@ -1,4 +1,4 @@
-# UNIWheels - Back Development
+# PoolWheels - Back Development
  
 ## Contributors:
 
@@ -12,7 +12,7 @@
 
 ## Description
 
-UniWheels offers ridesharing between trusted users in a fast and easy way, you can find your ideal ride at a very low price and why not save while driving.
+PoolWheels offers ridesharing between trusted users in a fast and easy way, you can find your ideal ride at a very low price and why not save while driving.
 Post your next round trip on UniWheels and get income.
 With UniWheels you can travel in the company of people you know who study at the same university and have to travel the same route as you to get home.
 
@@ -32,7 +32,7 @@ To test the application do the following steps:
 To download the project run:
 
   ```bash
-    git clone https://github.com/UNIWheels/UNIWheels-Back.git
+    git clone https://github.com/PoolWheels/PoolWheels-Back.git
   ```
 
 ### Final points available :
