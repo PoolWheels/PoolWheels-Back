@@ -16,7 +16,6 @@ public class CommentDto {
     private CommentTypeEnum type;
 
     public CommentDto() {
-        this.id = String.valueOf((int)(Math.random()*5));
     }
 
     public CommentDto(String user, Date creationDate, Date modificationDate, String description, CommentTypeEnum type) {

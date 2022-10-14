@@ -16,7 +16,7 @@ public class PayMethodDto {
 
     // Creating a random number between 0 and 9 and setting it to the id.
     public PayMethodDto(){
-        this.id = String.valueOf((int)(Math.random()*9));
+
     }
 
     // A constructor that takes in the parameters and sets them to the class variables.

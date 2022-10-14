@@ -24,7 +24,6 @@ public class UserTravelerDTO {
 
 
     public UserTravelerDTO(){
-        this.id = String.valueOf((int)(Math.random()*5));
     }
 
     public UserTravelerDTO(String name,String lastName, String email, String password, String university, int phone, String rol, String Paymethod){

@@ -31,7 +31,6 @@ public class UserDriverDTO {
 
 
     public UserDriverDTO(){
-        this.id = String.valueOf((int)(Math.random()*5));
     }
 
     public UserDriverDTO(String name,String lastName, String email, String password, String university, int phone, String rol, String photo, String modelCar, String plate, String document){

@@ -19,7 +19,6 @@ public class TripDto {
 
     // It's a constructor.
     public TripDto(){
-        this.id = String.valueOf((int)(Math.random()*9));
     }
 
     // It's a constructor.
