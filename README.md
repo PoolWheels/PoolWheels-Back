@@ -156,21 +156,59 @@ Remember to add the token obtained in the request.
 
 5. Booking a trip seat. Add the id trip and id user traveler:
 
-  **Type**: POST
+   **Type**: POST
 
-  **URL**: http://localhost:8080/api/v1/trip/634b06f8464bb818bb2e6121/passengers/634b0b319cf18a0780001533
+   **URL**: http://localhost:8080/api/v1/trip/634b06f8464bb818bb2e6121/passengers/634b0b319cf18a0780001533
 
-  ![reservationTrip](img/reservationTrip.png)
+![reservationTrip](img/reservationTrip.png)
 
 6. Delete a passenger's reservation:
 
-  **Type**: DELETE
+   **Type**: DELETE
 
-  **URL**: http://localhost:8080/api/v1/trip/634b06f8464bb818bb2e6121/passengers/634b0b319cf18a0780001533
+   **URL**: http://localhost:8080/api/v1/trip/634b06f8464bb818bb2e6121/passengers/634b0b319cf18a0780001533
 
-  ![deleteSeat](img/deleteUserTrip.png)
+![deleteSeat](img/deleteUserTrip.png)
 
-7. 
+### Control with paymethod services:
+
+**Endpoint:** /api/v1/paymethod/{...}
+
+1. Create a new paymethod:
+
+   **Type**: POST
+
+   **Url**: http://localhost:8080/api/paymethod
+
+```json
+{
+  "type": "Debit",
+  "owner": "0001",
+  "number": "1234-5678-9101-1121",
+  "bank": "Bancolombia",
+  "ExpirationDate": "07/27"
+}
+```
+
+![newPayMethod](img/newPayMethod.png)
+
+2. Update the paymethod:
+
+   **Type**: PUT
+
+   **Url**: http://localhost:8080/api/paymethod/634b11e3c65ec36f4d27a1b8
+
+![updatePayMethod](img/updatePM.png)
+
+3. Get all the paymethods:
+
+   **Type**: GET
+
+   **Url**: http://localhost:8080/api/paymethod
+
+  ![getPayMethods](img/getAllPayMethods.png)
+
+
 
 
 ## Built With
