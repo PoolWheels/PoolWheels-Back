@@ -19,7 +19,7 @@ public class UserDriverDTO {
 
     private String document;
 
-    private int phone;
+    private String phone;
 
     private String photo;
 
@@ -33,7 +33,7 @@ public class UserDriverDTO {
     public UserDriverDTO(){
     }
 
-    public UserDriverDTO(String name,String lastName, String email, String password, String university, int phone, String rol, String photo, String modelCar, String plate, String document){
+    public UserDriverDTO(String name,String lastName, String email, String password, String university, String phone, String rol, String photo, String modelCar, String plate, String document){
         this();
         this.name = name;
         this.lastName = lastName;
@@ -48,7 +48,7 @@ public class UserDriverDTO {
         this.plate = plate;
     }
 
-    public UserDriverDTO(String id, String name,String lastName, String email, String password, String university, int phone, String rol, String photo, String modelCar, String plate, String document){
+    public UserDriverDTO(String id, String name,String lastName, String email, String password, String university, String phone, String rol, String photo, String modelCar, String plate, String document){
         this(name,lastName, email,password, university, phone,rol, photo , modelCar, plate, document);
         this.id = id;
     }
@@ -101,11 +101,11 @@ public class UserDriverDTO {
         this.document = document;
     }
 
-    public int getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 

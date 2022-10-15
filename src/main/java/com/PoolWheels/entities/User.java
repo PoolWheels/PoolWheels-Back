@@ -20,7 +20,7 @@ public abstract class User {
 
     private String university;
 
-    private int phone;
+    private String phone;
 
     private String rol;
 
@@ -64,11 +64,11 @@ public abstract class User {
         this.university = university;
     }
 
-    public int getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
@@ -90,10 +90,9 @@ public abstract class User {
 
 
     public User(){
-        this.id = String.valueOf((int)(Math.random()*5));
     }
 
-    public User(String name,String lastName, String email, String password, String university, int phone, String rol){
+    public User(String name,String lastName, String email, String password, String university, String phone, String rol){
         this();
         this.name = name;
         this.lastName = lastName;
@@ -104,7 +103,7 @@ public abstract class User {
         this.rol = rol;
     }
 
-    public User(String id, String name,String lastName, String email, String password, String university, int phone, String rol){
+    public User(String id, String name,String lastName, String email, String password, String university, String phone, String rol){
         this(name,lastName, email, BCrypt.hashpw(password, BCrypt.gensalt()), university, phone, rol);
         this.id = id;
     }

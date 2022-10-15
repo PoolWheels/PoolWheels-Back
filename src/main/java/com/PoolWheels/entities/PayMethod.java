@@ -2,7 +2,7 @@ package com.PoolWheels.entities;
 
 // This is importing the necessary packages for the class.
 import com.PoolWheels.dto.PayMethodDto;
-import com.PoolWheels.enums.enumPayMethod;
+import com.PoolWheels.enums.EnumPayMethod;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -16,7 +16,7 @@ public class PayMethod {
 
     @Id
     private String id;
-    private enumPayMethod Type;
+    private EnumPayMethod Type;
     private String owner;
     @Indexed(unique = true)
     private String number;
@@ -39,7 +39,7 @@ public class PayMethod {
     }
 
     // This is a constructor that takes in the parameters and sets them to the variables.
-    public PayMethod(enumPayMethod Type, String owner, String number, String bank, String ExpirationDate){
+    public PayMethod(EnumPayMethod Type, String owner, String number, String bank, String ExpirationDate){
         this();
         this.Type = Type;
         this.owner = owner;
@@ -49,7 +49,7 @@ public class PayMethod {
     }
 
     // This is a constructor that takes in the parameters and sets them to the variables.
-    public PayMethod(String id, enumPayMethod type, String owner, String number, String bank, String ExpirationDate){
+    public PayMethod(String id, EnumPayMethod type, String owner, String number, String bank, String ExpirationDate){
         this(type, owner, number, bank, ExpirationDate);
         this.id = id;
     }
@@ -59,7 +59,7 @@ public class PayMethod {
      *
      * @return The type of payment method.
      */
-    public enumPayMethod getType() {
+    public EnumPayMethod getType() {
         return Type;
     }
 
@@ -122,7 +122,7 @@ public class PayMethod {
      *
      * @param type The type of payment method.
      */
-    public void setType(enumPayMethod type) {
+    public void setType(EnumPayMethod type) {
         Type = type;
     }
 

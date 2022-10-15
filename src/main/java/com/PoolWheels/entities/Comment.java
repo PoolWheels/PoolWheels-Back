@@ -1,6 +1,7 @@
 package com.PoolWheels.entities;
 
 import com.PoolWheels.dto.CommentDto;
+import com.PoolWheels.enums.CommentTypeEnum;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -16,7 +17,7 @@ public class Comment {
     private Date creationDate;
     private Date modificationDate;
     private String description;
-    private String type;
+    private CommentTypeEnum type;
 
     public Comment() {
         this.id = String.valueOf((int)(Math.random()*5));
@@ -28,10 +29,10 @@ public class Comment {
         this.creationDate = commentDto.getCreationDate();
         this.modificationDate = commentDto.getModificationDate();
         this.description = commentDto.getDescription();
-        this.type = commentDto.getType().toString();
+        this.type = commentDto.getType();
     }
 
-    public Comment(String user, Date creationDate, Date modificationDate, String description, String type) {
+    public Comment(String user, Date creationDate, Date modificationDate, String description, CommentTypeEnum type) {
         this();
         this.user = user;
         this.creationDate = creationDate;
@@ -40,7 +41,7 @@ public class Comment {
         this.type = type;
     }
 
-    public Comment(String id, String user, Date creationDate, Date modificationDate, String description, String type) {
+    public Comment(String id, String user, Date creationDate, Date modificationDate, String description, CommentTypeEnum type) {
         this(user, creationDate, modificationDate, description, type);
         this.id = id;
     }
@@ -140,7 +141,7 @@ public class Comment {
      *
      * @return The type of the object.
      */
-    public String getType() {
+    public CommentTypeEnum getType() {
         return type;
     }
 
@@ -149,7 +150,7 @@ public class Comment {
      *
      * @param type The type of the event.
      */
-    public void setType(String type) {
+    public void setType(CommentTypeEnum type) {
         this.type = type;
     }
 

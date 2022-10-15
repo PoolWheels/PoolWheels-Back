@@ -16,7 +16,7 @@ public class UserTravelerDTO {
 
     private String university;
 
-    private int phone;
+    private String phone;
 
     private String pay_methods;
 
@@ -26,7 +26,7 @@ public class UserTravelerDTO {
     public UserTravelerDTO(){
     }
 
-    public UserTravelerDTO(String name,String lastName, String email, String password, String university, int phone, String rol, String Paymethod){
+    public UserTravelerDTO(String name,String lastName, String email, String password, String university, String phone, String rol, String Paymethod){
         this();
         this.name = name;
         this.lastName = lastName;
@@ -38,7 +38,7 @@ public class UserTravelerDTO {
         this.pay_methods = Paymethod;
     }
 
-    public UserTravelerDTO(String id, String name,String lastName, String email, String password, String university, int phone, String rol, String paymethods){
+    public UserTravelerDTO(String id, String name,String lastName, String email, String password, String university, String phone, String rol, String paymethods){
         this(name,lastName, email,password, university, phone,rol, paymethods);
         this.id = id;
     }
@@ -85,11 +85,11 @@ public class UserTravelerDTO {
         this.university = university;
     }
 
-    public int getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 

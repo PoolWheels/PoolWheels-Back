@@ -1,6 +1,6 @@
 package com.PoolWheels.dto;
 
-import com.PoolWheels.enums.enumPayMethod;
+import com.PoolWheels.enums.EnumPayMethod;
 
 /**
  * A DTO class that represents a PayMethod.
@@ -8,7 +8,7 @@ import com.PoolWheels.enums.enumPayMethod;
 public class PayMethodDto {
 
     private String id;
-    private enumPayMethod Type;
+    private EnumPayMethod Type;
     private String owner;
     private String number;
     private String bank;
@@ -20,7 +20,7 @@ public class PayMethodDto {
     }
 
     // A constructor that takes in the parameters and sets them to the class variables.
-    public PayMethodDto(enumPayMethod Type, String owner, String number, String bank, String ExpirationDate){
+    public PayMethodDto(EnumPayMethod Type, String owner, String number, String bank, String ExpirationDate){
         this();
         this.Type = Type;
         this.owner = owner;
@@ -30,7 +30,7 @@ public class PayMethodDto {
     }
 
     // This is a constructor that takes in the parameters and sets them to the class variables.
-    public PayMethodDto(String id, enumPayMethod type, String owner, String number, String bank, String ExpirationDate){
+    public PayMethodDto(String id, EnumPayMethod type, String owner, String number, String bank, String ExpirationDate){
         this(type, owner, number, bank, ExpirationDate);
         this.id = id;
     }
@@ -40,7 +40,7 @@ public class PayMethodDto {
      *
      * @return The type of payment method.
      */
-    public enumPayMethod getType() {
+    public EnumPayMethod getType() {
         return Type;
     }
 
@@ -103,7 +103,7 @@ public class PayMethodDto {
      *
      * @param type The type of payment method.
      */
-    public void setType(enumPayMethod type) {
+    public void setType(EnumPayMethod type) {
         Type = type;
     }
 

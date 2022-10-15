@@ -8,6 +8,7 @@ import com.PoolWheels.repository.UserTravelerRepository;
 import com.PoolWheels.service.UserService;
 import com.mongodb.DuplicateKeyException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
@@ -32,6 +33,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDriver createUserDriver(UserDriver userDriver) {
         try {
+            userDriver.setPassword(BCrypt.hashpw(userDriver.getPassword(), BCrypt.gensalt()));
             userDriverRepository.insert(userDriver);
             Optional<UserDriver> userTemp = userDriverRepository.findById(userDriver.getId());
             return userTemp.orElse(null);
@@ -73,6 +75,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserTraveler createUserTraveler(UserTraveler userTraveler){
         try {
+            userTraveler.setPassword(BCrypt.hashpw(userTraveler.getPassword(), BCrypt.gensalt()));
             userTravelerRepository.insert(userTraveler);
             Optional<UserTraveler> userT = userTravelerRepository.findById(userTraveler.getId());
             return userT.orElse(null);

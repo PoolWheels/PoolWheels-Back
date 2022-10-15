@@ -9,6 +9,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,7 +41,8 @@ public class AuthController
     public TokenDto login(@RequestBody LoginDto loginDto )
     {
         User user = userService.findByEmail(loginDto.getEmail());
-        if ( loginDto.getPassword().equals(user.getPassword()) ){
+        if(BCrypt.checkpw(loginDto.getPassword(), user.getPassword() ) ){
+            //if ( loginDto.getPassword().equals(user.getPassword()) ){
             return generateTokenDto(user);
         }
         else

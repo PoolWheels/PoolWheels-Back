@@ -14,7 +14,6 @@ public class UserTraveler extends User {
 
 
     public UserTraveler(){
-
     }
 
     public UserTraveler(UserTravelerDTO userTravellerDTO) {

@@ -1,5 +1,5 @@
 # PoolWheels - Back Development
- 
+
 ## Contributors:
 
 - Camilo Andrés Pichimata Cárdenas
@@ -9,15 +9,13 @@
 - Zuly Valentina Vargas Ramírez
 - Natalia Orjuela Hernandez
 
-
 ## Description
 
 PoolWheels offers ridesharing between trusted users in a fast and easy way, you can find your ideal ride at a very low price and why not save while driving.
 Post your next round trip on PoolWheels and get income.
 With PoolWheels you can travel in the company of people you know who study at the same university and have to travel the same route as you to get home.
 
-This repository includes the backend development of the application. 
-
+This repository includes the backend development of the application.
 
 User stories Sprint 1 :
 
@@ -31,32 +29,38 @@ To test the application do the following steps:
 
 To download the project run:
 
-  ```bash
-    git clone https://github.com/PoolWheels/PoolWheels-Back.git
-  ```
+```bash
+  git clone https://github.com/PoolWheels/PoolWheels-Back.git
+```
 
-### Final points available :
+The project has 4 different controllers. Each one groups the endpoints corresponding to the service it is responsible for.
+The controllers are: UserController, PayMethodController, TripController, CommentController.
 
-1. First, you need to create a user:
+## Final points available :
+
+### Control with user services:
+
+**Endpoint:** /api/v1/user/{...}
+
+1. First, you need to create a user. In this case a driver user is created:
 
 **Type**: POST
 
-**Url**: http://localhost:8080/api/v1/driverusers/
+**Url**: http://localhost:8080/api/v1/user/driverusers
 
 ```json
 {
-    "id": "000123",
-    "name": "User ",
-    "lastName": "test 2",
-    "email": "test2user@gmail.com",
-    "password": "testdos",
-    "university": "university",
-    "phone": "1234",
-    "rol": "ADMIN",
-    "document": "1234",
-    "photoCar": "car.png",
-    "modeloCar": "mazda",
-    "plate": "ABC345"
+  "name": "User ",
+  "lastName": "test 2",
+  "email": "test2user@gmail.com",
+  "password": "testdos",
+  "university": "university",
+  "phone": "1234",
+  "rol": "DRIVER",
+  "document": "1234",
+  "photoCar": "car.png",
+  "modeloCar": "mazda",
+  "plate": "ABC345"
 }
 ```
 
@@ -64,74 +68,43 @@ To download the project run:
 
 2. Now you can use the endpoints adding the token. For obtain a token of Bearer type use:
 
-    **Type**: POST
+   **Type**: POST
 
-    **Url**: http://localhost:8080/v1/auth
+   **Url**: http://localhost:8080/v1/auth
 
-    ```json
-    Body: {"email": "test2user@gmail.com", "password": "testdos"}
-     ```
-    
+   ```json
+   Body: {"email": "test2user@gmail.com", "password": "testdos"}
+   ```
+
 ![token](img/token.png)
 
-
-3.  For the travel user you can add a paymethod:
-
-**Type**: POST
-
-**Url**: http://localhost:8080/api/v1/paymethots
-
-```json
-{"type": "Debito", "owner": "0001", "number": "1234-5678-9101-1121", "bank": "Bancolombia", "ExpirationDate": "07/27"}
-```
-
-![](img/newPayMethod.png)
-
-4. Obtain the paymethods:
+3. Get a user by their id:
 
 **Type**: GET
 
-**Url**: http://localhost:8080/api/v1/paymethots
+**Url**: http://localhost:8080/api/v1/user/driverusers/634ae33f251b7f4045b8e435
 
-![getAllPayMethods](img/getAllPayMethods.png)
+Remember to add the token obtained in the request.
 
-5. Add a new trip:
+![userID](img/getUserByID.png)
 
-**Type**: POST
+4. Updating a user's information. In this case, the name of the the university.
 
-**Url**: http://localhost:8080/api/v1/trips
+**Type**: PUT
 
-```json
+**Url**: http://localhost:8080/api/v1/user/driverusers/634ae33f251b7f4045b8e435
 
-{"driver": "1", "addrInit": "Calle 123", "addrFin": "Kra 456", "availableSeats": "3", "passengers": ["0002", "0004"], "initTime": "13:00", "finTime": "14:00", "stops": {"Stpo 1": "2000", "Stop 2": "4000"}, "active": true}
-```
+![DELETE](img/updateUserDriver.png)
 
-![createTrip](img/createTrip.png)
+5. Delete a user. This is only allowed with administrator permissions.
 
-6. Get a trip by a id:
+**Type**: DELETE
 
+**Url**: http://localhost:8080/api/v1/user/driverusers/005
 
-**Type**: GET
-
-**Url**: http://localhost:8080/api/v1/trips/1
-
-![getTripById](img/getTripById.png)
-
-
-7. Add a new comment
-
-**Type**: POST
-
-**Url**: http://localhost:8080/api/v1/comments
-
-```json
-{"user": "0001", "creationDate": "2022-09-15", "modificationDate": "2022-09-15", "description": "Es un muy bien servicio", "type": "COMPLAINT"}
-```
-
-![addNewComment](img/createComment.png)
-
+![userDelete](img/deleteUser.png)
 
 ## Built With
 
-* [Gradle](https://gradle.org) - Management tool used for projects build, dependency and documentation.
-* [Java ](https://www.oracle.com/co/java/technologies/javase/javase-jdk8-downloads.html)     - Programming language and computing platform.
+- [Gradle](https://gradle.org) - Management tool used for projects build, dependency and documentation.
+- [Java ](https://www.oracle.com/co/java/technologies/javase/javase-jdk8-downloads.html) - Programming language and computing platform.
