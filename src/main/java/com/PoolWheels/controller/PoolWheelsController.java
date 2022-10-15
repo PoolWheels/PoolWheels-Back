@@ -26,8 +26,6 @@ public class PoolWheelsController {
     @Autowired
     private final TripService tripService;
 
-    @Autowired
-    private final UserService userService;
 
     @Autowired
     private final CommentService commentService;
@@ -40,12 +38,10 @@ public class PoolWheelsController {
      *
      * @param payMethodService The payment methods service
      * @param tripService The trips service
-     * @param userService The Users service
      */
-        public PoolWheelsController (PayMethodService payMethodService, TripService tripService, UserService userService, CommentService commentService) {
+        public PoolWheelsController (PayMethodService payMethodService, TripService tripService, CommentService commentService) {
                 this.payMethodService = payMethodService;
                 this.tripService = tripService;
-                this.userService = userService;
                 this.commentService = commentService;
                 }
 

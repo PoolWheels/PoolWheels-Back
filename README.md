@@ -44,9 +44,9 @@ The controllers are: UserController, PayMethodController, TripController, Commen
 
 1. First, you need to create a user. In this case a driver user is created:
 
-**Type**: POST
+   **Type**: POST
 
-**Url**: http://localhost:8080/api/v1/user/driverusers
+   **Url**: http://localhost:8080/api/v1/user/driverusers
 
 ```json
 {
@@ -80,9 +80,9 @@ The controllers are: UserController, PayMethodController, TripController, Commen
 
 3. Get a user by their id:
 
-**Type**: GET
+   **Type**: GET
 
-**Url**: http://localhost:8080/api/v1/user/driverusers/634ae33f251b7f4045b8e435
+   **Url**: http://localhost:8080/api/v1/user/driverusers/634ae33f251b7f4045b8e435
 
 Remember to add the token obtained in the request.
 
@@ -90,19 +90,88 @@ Remember to add the token obtained in the request.
 
 4. Updating a user's information. In this case, the name of the the university.
 
-**Type**: PUT
+   **Type**: PUT
 
-**Url**: http://localhost:8080/api/v1/user/driverusers/634ae33f251b7f4045b8e435
+   **Url**: http://localhost:8080/api/v1/user/driverusers/634ae33f251b7f4045b8e435
 
 ![DELETE](img/updateUserDriver.png)
 
 5. Delete a user. This is only allowed with administrator permissions.
 
-**Type**: DELETE
+   **Type**: DELETE
 
-**Url**: http://localhost:8080/api/v1/user/driverusers/005
+   **Url**: http://localhost:8080/api/v1/user/driverusers/005
 
 ![userDelete](img/deleteUser.png)
+
+### Control with trip services:
+
+**Endpoint:** /api/v1/trip/{...}
+
+1. Create a new trip:
+
+   **Type**: POST
+
+   **Url**: http://localhost:8080/api/v1/trip
+
+```json
+{
+  "driver": "634b0439a2992f7d8e9f1046",
+  "addrInit": "C.C Santa Fe",
+  "addrFin": "ECI",
+  "availableSeats": "3",
+  "passengers": ["634b051b464bb818bb2e611f"],
+  "initTime": "13:00",
+  "finTime": "13:30",
+  "stops": { "Stop 1": "2000", "Stop 2": "4000" },
+  "active": true
+}
+```
+
+![newTrip](img/createTrip.png)
+
+2. Get a Trip By ID:
+
+   **Type**: GET
+
+   **Url**: http://localhost:8080/api/v1/trip/634b06f8464bb818bb2e6121
+
+![newTrip](img/getTripById.png)
+
+3. Update a trip:
+
+   **Type**: POST
+
+   **Url**: http://localhost:8080/api/v1/trip/634b06f8464bb818bb2e6121
+
+   ![updateTrip](img/updateTrip.png)
+
+4. Check if there are available seats:
+
+   **Type**: GET
+
+   **Url**: http://localhost:8080/api/v1/trip/634b06f8464bb818bb2e6121/ availableseats
+
+   ![seatsTrip](img/seatsTrip.png)
+
+5. Booking a trip seat. Add the id trip and id user traveler:
+
+  **Type**: POST
+
+  **URL**: http://localhost:8080/api/v1/trip/634b06f8464bb818bb2e6121/passengers/634b0b319cf18a0780001533
+
+  ![reservationTrip](img/reservationTrip.png)
+
+6. Delete a passenger's reservation:
+
+  **Type**: DELETE
+
+  **URL**: http://localhost:8080/api/v1/trip/634b06f8464bb818bb2e6121/passengers/634b0b319cf18a0780001533
+
+  ![deleteSeat](img/deleteUserTrip.png)
+
+7. 
+
 
 ## Built With
 

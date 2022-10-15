@@ -2,9 +2,6 @@ package com.PoolWheels.controller;
 
 import com.PoolWheels.dto.*;
 import com.PoolWheels.entities.*;
-import com.PoolWheels.service.CommentService;
-import com.PoolWheels.service.PayMethodService;
-import com.PoolWheels.service.TripService;
 import com.PoolWheels.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;

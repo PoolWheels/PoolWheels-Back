@@ -46,6 +46,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDriver updateDriver(UserDriver userDriver,String userId){
         if (userDriverRepository.existsById(userId)) {
+            userDriver.setPassword(BCrypt.hashpw(userDriver.getPassword(), BCrypt.gensalt()));
             return userDriverRepository.save(userDriver);
         } else {
             System.out.println("Unregistered user");
@@ -87,6 +88,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserTraveler updateTraveler(UserTraveler userTraveler,String userId){
         if (userTravelerRepository.existsById(userId)) {
+            userTraveler.setPassword(BCrypt.hashpw(userTraveler.getPassword(), BCrypt.gensalt()));
             return userTravelerRepository.save(userTraveler);
         } else {
             System.out.println("Unregistered user");

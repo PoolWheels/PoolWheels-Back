@@ -3,8 +3,10 @@ package com.PoolWheels.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
 import com.PoolWheels.entities.Trip;
@@ -92,8 +94,12 @@ public class TripServiceMongoDB implements TripService{
      */
     @Override
     public Trip update(Trip trip, String id) {
-        create(trip);
-        return findById(id);
+        if (tripsRepository.existsById(id)) {
+            return tripsRepository.save(trip);
+        } else {
+            System.out.println("Unregistered trip");
+            return null;
+        }
     }
 
     /**
@@ -110,6 +116,7 @@ public class TripServiceMongoDB implements TripService{
         boolean added = passengers.add(idUser);
         if (added) {
             trip.setPassengers(passengers);
+            trip.setAvailableSeats( new AtomicInteger(trip.getAvailableSeats().decrementAndGet()));
             update(trip, trip.getId());
             return true;
         } else {
