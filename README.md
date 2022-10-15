@@ -206,10 +206,35 @@ Remember to add the token obtained in the request.
 
    **Url**: http://localhost:8080/api/paymethod
 
-  ![getPayMethods](img/getAllPayMethods.png)
+![getPayMethods](img/getAllPayMethods.png)
 
+### Control with comment services:
 
+**Endpoint:** /api/v1/comment/{...}
 
+1. Add a new comment:
+
+   **Type**: POST
+
+   **Url**: http://localhost:8080/api/comment
+
+![getPayMethods](img/createComment.png)
+
+2. Update a comment:
+
+   **Type**: PUT
+
+   **Url**: http://localhost:8080/api/comment/634b16af339f175dabf79e80
+
+![updateComment](img/updateComment.png)
+
+3. Get the comments:
+
+   **Type**: GET
+
+   **Url**: http://localhost:8080/api/v1/comment
+
+![getComments](img/getAllComments.png)
 
 ## Built With
 
