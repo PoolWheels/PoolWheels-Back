@@ -1,5 +1,5 @@
 # PoolWheels - Back Development
- 
+
 ## Contributors:
 
 - Camilo Andrés Pichimata Cárdenas
@@ -9,15 +9,13 @@
 - Zuly Valentina Vargas Ramírez
 - Natalia Orjuela Hernandez
 
-
 ## Description
 
 PoolWheels offers ridesharing between trusted users in a fast and easy way, you can find your ideal ride at a very low price and why not save while driving.
 Post your next round trip on PoolWheels and get income.
 With PoolWheels you can travel in the company of people you know who study at the same university and have to travel the same route as you to get home.
 
-This repository includes the backend development of the application. 
-
+This repository includes the backend development of the application.
 
 User stories Sprint 1 :
 
@@ -31,32 +29,38 @@ To test the application do the following steps:
 
 To download the project run:
 
-  ```bash
-    git clone https://github.com/PoolWheels/PoolWheels-Back.git
-  ```
+```bash
+  git clone https://github.com/PoolWheels/PoolWheels-Back.git
+```
 
-### Final points available :
+The project has 4 different controllers. Each one groups the endpoints corresponding to the service it is responsible for.
+The controllers are: UserController, PayMethodController, TripController, CommentController.
 
-1. First, you need to create a user:
+## Final points available :
 
-**Type**: POST
+### Control with user services:
 
-**Url**: http://localhost:8080/api/v1/driverusers/
+**Endpoint:** /api/v1/user/{...}
+
+1. First, you need to create a user. In this case a driver user is created:
+
+   **Type**: POST
+
+   **Url**: http://localhost:8080/api/v1/user/driverusers
 
 ```json
 {
-    "id": "000123",
-    "name": "User ",
-    "lastName": "test 2",
-    "email": "test2user@gmail.com",
-    "password": "testdos",
-    "university": "university",
-    "phone": "1234",
-    "rol": "ADMIN",
-    "document": "1234",
-    "photoCar": "car.png",
-    "modeloCar": "mazda",
-    "plate": "ABC345"
+  "name": "User ",
+  "lastName": "test 2",
+  "email": "test2user@gmail.com",
+  "password": "testdos",
+  "university": "university",
+  "phone": "1234",
+  "rol": "DRIVER",
+  "document": "1234",
+  "photoCar": "car.png",
+  "modeloCar": "mazda",
+  "plate": "ABC345"
 }
 ```
 
@@ -64,74 +68,175 @@ To download the project run:
 
 2. Now you can use the endpoints adding the token. For obtain a token of Bearer type use:
 
-    **Type**: POST
+   **Type**: POST
 
-    **Url**: http://localhost:8080/v1/auth
+   **Url**: http://localhost:8080/v1/auth
 
-    ```json
-    Body: {"email": "test2user@gmail.com", "password": "testdos"}
-     ```
-    
+   ```json
+   Body: {"email": "test2user@gmail.com", "password": "testdos"}
+   ```
+
 ![token](img/token.png)
 
+3. Get a user by their id:
 
-3.  For the travel user you can add a paymethod:
+   **Type**: GET
 
-**Type**: POST
+   **Url**: http://localhost:8080/api/v1/user/driverusers/634ae33f251b7f4045b8e435
 
-**Url**: http://localhost:8080/api/v1/paymethots
+Remember to add the token obtained in the request.
 
-```json
-{"type": "Debito", "owner": "0001", "number": "1234-5678-9101-1121", "bank": "Bancolombia", "ExpirationDate": "07/27"}
-```
+![userID](img/getUserByID.png)
 
-![](img/newPayMethod.png)
+4. Updating a user's information. In this case, the name of the the university.
 
-4. Obtain the paymethods:
+   **Type**: PUT
 
-**Type**: GET
+   **Url**: http://localhost:8080/api/v1/user/driverusers/634ae33f251b7f4045b8e435
 
-**Url**: http://localhost:8080/api/v1/paymethots
+![DELETE](img/updateUserDriver.png)
 
-![getAllPayMethods](img/getAllPayMethods.png)
+5. Delete a user. This is only allowed with administrator permissions.
 
-5. Add a new trip:
+   **Type**: DELETE
 
-**Type**: POST
+   **Url**: http://localhost:8080/api/v1/user/driverusers/005
 
-**Url**: http://localhost:8080/api/v1/trips
+![userDelete](img/deleteUser.png)
 
-```json
+### Control with trip services:
 
-{"driver": "1", "addrInit": "Calle 123", "addrFin": "Kra 456", "availableSeats": "3", "passengers": ["0002", "0004"], "initTime": "13:00", "finTime": "14:00", "stops": {"Stpo 1": "2000", "Stop 2": "4000"}, "active": true}
-```
+**Endpoint:** /api/v1/trip/{...}
 
-![createTrip](img/createTrip.png)
+1. Create a new trip:
 
-6. Get a trip by a id:
+   **Type**: POST
 
-
-**Type**: GET
-
-**Url**: http://localhost:8080/api/v1/trips/1
-
-![getTripById](img/getTripById.png)
-
-
-7. Add a new comment
-
-**Type**: POST
-
-**Url**: http://localhost:8080/api/v1/comments
+   **Url**: http://localhost:8080/api/v1/trip
 
 ```json
-{"user": "0001", "creationDate": "2022-09-15", "modificationDate": "2022-09-15", "description": "Es un muy bien servicio", "type": "COMPLAINT"}
+{
+  "driver": "634b0439a2992f7d8e9f1046",
+  "addrInit": "C.C Santa Fe",
+  "addrFin": "ECI",
+  "availableSeats": "3",
+  "passengers": ["634b051b464bb818bb2e611f"],
+  "initTime": "13:00",
+  "finTime": "13:30",
+  "stops": { "Stop 1": "2000", "Stop 2": "4000" },
+  "active": true
+}
 ```
 
-![addNewComment](img/createComment.png)
+![newTrip](img/createTrip.png)
 
+2. Get a Trip By ID:
+
+   **Type**: GET
+
+   **Url**: http://localhost:8080/api/v1/trip/634b06f8464bb818bb2e6121
+
+![newTrip](img/getTripById.png)
+
+3. Update a trip:
+
+   **Type**: POST
+
+   **Url**: http://localhost:8080/api/v1/trip/634b06f8464bb818bb2e6121
+
+   ![updateTrip](img/updateTrip.png)
+
+4. Check if there are available seats:
+
+   **Type**: GET
+
+   **Url**: http://localhost:8080/api/v1/trip/634b06f8464bb818bb2e6121/ availableseats
+
+   ![seatsTrip](img/seatsTrip.png)
+
+5. Booking a trip seat. Add the id trip and id user traveler:
+
+   **Type**: POST
+
+   **URL**: http://localhost:8080/api/v1/trip/634b06f8464bb818bb2e6121/passengers/634b0b319cf18a0780001533
+
+![reservationTrip](img/reservationTrip.png)
+
+6. Delete a passenger's reservation:
+
+   **Type**: DELETE
+
+   **URL**: http://localhost:8080/api/v1/trip/634b06f8464bb818bb2e6121/passengers/634b0b319cf18a0780001533
+
+![deleteSeat](img/deleteUserTrip.png)
+
+### Control with paymethod services:
+
+**Endpoint:** /api/v1/paymethod/{...}
+
+1. Create a new paymethod:
+
+   **Type**: POST
+
+   **Url**: http://localhost:8080/api/paymethod
+
+```json
+{
+  "type": "Debit",
+  "owner": "0001",
+  "number": "1234-5678-9101-1121",
+  "bank": "Bancolombia",
+  "ExpirationDate": "07/27"
+}
+```
+
+![newPayMethod](img/newPayMethod.png)
+
+2. Update the paymethod:
+
+   **Type**: PUT
+
+   **Url**: http://localhost:8080/api/paymethod/634b11e3c65ec36f4d27a1b8
+
+![updatePayMethod](img/updatePM.png)
+
+3. Get all the paymethods:
+
+   **Type**: GET
+
+   **Url**: http://localhost:8080/api/paymethod
+
+![getPayMethods](img/getAllPayMethods.png)
+
+### Control with comment services:
+
+**Endpoint:** /api/v1/comment/{...}
+
+1. Add a new comment:
+
+   **Type**: POST
+
+   **Url**: http://localhost:8080/api/comment
+
+![getPayMethods](img/createComment.png)
+
+2. Update a comment:
+
+   **Type**: PUT
+
+   **Url**: http://localhost:8080/api/comment/634b16af339f175dabf79e80
+
+![updateComment](img/updateComment.png)
+
+3. Get the comments:
+
+   **Type**: GET
+
+   **Url**: http://localhost:8080/api/v1/comment
+
+![getComments](img/getAllComments.png)
 
 ## Built With
 
-* [Gradle](https://gradle.org) - Management tool used for projects build, dependency and documentation.
-* [Java ](https://www.oracle.com/co/java/technologies/javase/javase-jdk8-downloads.html)     - Programming language and computing platform.
+- [Gradle](https://gradle.org) - Management tool used for projects build, dependency and documentation.
+- [Java ](https://www.oracle.com/co/java/technologies/javase/javase-jdk8-downloads.html) - Programming language and computing platform.
