@@ -21,5 +21,6 @@ public interface TripService {
     boolean fullQuotas( String idTrip );
 
     boolean removeReservation(String idTrip, String idUser );
-    
+
+    List<Trip> getTripsByIdUserTraveler(String idUser);
 }
