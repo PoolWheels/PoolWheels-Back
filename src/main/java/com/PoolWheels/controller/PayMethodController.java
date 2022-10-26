@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping( "/api/v1/paymethod" )
 public class PayMethodController {
 

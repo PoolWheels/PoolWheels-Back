@@ -15,6 +15,7 @@ import java.util.NoSuchElementException;
 
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping( "/api/v1/trip" )
 public class TripController {
 
@@ -207,6 +208,22 @@ public class TripController {
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<Boolean>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    @GetMapping("/trips/{idUserTraveler}")
+    public ResponseEntity<List<TripDto>> getTripsByUser(@PathVariable String idUserTraveler){
+        try{
+            List<Trip> tripList = tripService.getTripsByIdUserTraveler(idUserTraveler);
+            ArrayList<TripDto> data = new ArrayList<TripDto>();
+            if (!tripList.isEmpty()) {
+                for (Trip t : tripList) {
+                    data.add(modelMapper.map(t, TripDto.class));
+                }
+            }
+            return new ResponseEntity<List<TripDto>> (data, HttpStatus.OK);
+        }catch(Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<List<TripDto>>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import com.PoolWheels.dto.TripDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
@@ -160,5 +161,19 @@ public class TripServiceMongoDB implements TripService{
         } else {
             return false;
         }
+    }
+
+    @Override
+    public List<Trip> getTripsByIdUserTraveler(String idUser) {
+        List<Trip> tripList = getAll();
+        List<Trip> result = new ArrayList<>();
+        if (!tripList.isEmpty()) {
+            for (Trip t : tripList) {
+                if (t.getPassengers().contains(idUser)) {
+                    result.add(t);
+                }
+            }
+        }
+        return result;
     }
 }
