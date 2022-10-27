@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 @RestController
-@CrossOrigin(origins = "*")
 @RequestMapping( "/api/v1/paymethod" )
 public class PayMethodController {
 
@@ -142,6 +141,29 @@ public class PayMethodController {
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<Boolean>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    /**
+     * This function returns a list of payment methods associated with a user
+     *
+     * @param idUser The id of the user who is making the request.
+     * @return A list of PayMethodDto objects
+     */
+    @GetMapping("/Paymeths/{idUser}")
+    public ResponseEntity<List<PayMethodDto>> getPaymethodsByUser(@PathVariable String idUser){
+        try{
+            List<PayMethod> tripList = payMethodService.getTripsByIdUserTraveler(idUser);
+            ArrayList<PayMethodDto> data = new ArrayList<PayMethodDto>();
+            if (!tripList.isEmpty()) {
+                for (PayMethod t : tripList) {
+                    data.add(modelMapper.map(t, PayMethodDto.class));
+                }
+            }
+            return new ResponseEntity<List<PayMethodDto>> (data, HttpStatus.OK);
+        }catch(Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<List<PayMethodDto>>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
