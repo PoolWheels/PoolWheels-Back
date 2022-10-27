@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -250,6 +251,26 @@ public class UserController {
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<Boolean>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/getUserByEmail/{userEmail}")
+    public ResponseEntity<HashMap<String, String>> getUsersByEmail(@PathVariable String userEmail) {
+        try {
+            User user = userService.findByEmail(userEmail);
+            if (user != null) {
+                String userRol = user.getRol();
+                HashMap<String, String> hashMap = new HashMap<>();
+                hashMap.put("id", user.getId());
+                hashMap.put("rol", user.getRol());
+                hashMap.put("name", user.getName());
+                return new ResponseEntity<>(hashMap, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }
