@@ -8,6 +8,7 @@ import com.mongodb.DuplicateKeyException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -97,5 +98,19 @@ public class PayMethodServiceMongoDB implements PayMethodService {
             System.out.println("The specified id is not registered");
             return null;
         }
+    }
+
+    @Override
+    public List<PayMethod> getTripsByIdUserTraveler(String idUser) {
+        List<PayMethod> paymethList = getAll();
+        List<PayMethod> result = new ArrayList<>();
+        if (!paymethList.isEmpty()) {
+            for (PayMethod t : paymethList) {
+                if (t.getOwner().contains(idUser)) {
+                    result.add(t);
+                }
+            }
+        }
+        return result;
     }
 }

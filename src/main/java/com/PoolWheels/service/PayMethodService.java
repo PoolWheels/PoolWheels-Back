@@ -19,4 +19,6 @@ public interface PayMethodService {
 
     PayMethod update(PayMethod user, String userId );
 
+    List<PayMethod> getTripsByIdUserTraveler(String idUser);
+
 }
